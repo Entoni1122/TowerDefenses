@@ -594,7 +594,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   m_LocalRotation: {x: 0.41416538, y: -0, z: -0, w: 0.9102017}
-  m_LocalPosition: {x: 5.55, y: 15.37, z: -4.29}
+  m_LocalPosition: {x: 21.65, y: 29.65, z: -4.29}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1511,11 +1511,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8662c14f57432264a9cd10af7b53a1fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Row: 10
-  Column: 10
+  Row: 20
+  Column: 20
   xOffset: 3
   yOffset: 3
-  Node: {fileID: 1446122073190096872, guid: ba5c10e94d8b84c40b963fadcd1a9e5b, type: 3}
+  WaterNode: {fileID: 1446122073190096872, guid: 06aed74688adda64ab9e485e4e54f4f5,
+    type: 3}
+  GroundNode: {fileID: 1446122073190096872, guid: ba5c10e94d8b84c40b963fadcd1a9e5b,
+    type: 3}
+  TreeNode: {fileID: 1446122073190096872, guid: ee814915e47f87d4cac197e3def1b1a8,
+    type: 3}
+  noiseFrequency: 20
+  waterPropability: 0.35
+  treePropability: 0.6
 --- !u!1 &1016580209
 GameObject:
   m_ObjectHideFlags: 0

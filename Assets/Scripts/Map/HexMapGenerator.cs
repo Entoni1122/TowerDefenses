@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TreeEditor;
 using UnityEngine;
 
 namespace TowerDefense
@@ -10,7 +11,15 @@ namespace TowerDefense
         public int Column;
         public float xOffset, yOffset;
 
-        [SerializeField] GameObject Node;
+        [SerializeField] GameObject WaterNode;
+        [SerializeField] GameObject GroundNode;
+        [SerializeField] GameObject TreeNode;
+
+        //Noise diopo
+        [SerializeField] float noiseFrequency = 10f;
+        [SerializeField] float waterPropability;
+        [SerializeField] float treePropability;
+
 
         private void Start()
         {
@@ -24,8 +33,26 @@ namespace TowerDefense
                 for (int j = 0; j < Row; j++)
                 {
                     Vector2 hexcod = GetHexPosition(i, j);
-                    GameObject node = Instantiate(Node, transform.position, Quaternion.identity, transform);
-                    node.GetComponent<Nodes>().Init(new Vector3(hexcod.x,0,hexcod.y));
+
+                    float noiseValue = Mathf.PerlinNoise(hexcod.x / noiseFrequency, hexcod.y / noiseFrequency);
+
+                    float gg = (j * i) + Column;
+
+                    if (noiseValue < waterPropability)
+                    {
+                        GameObject node = Instantiate(WaterNode, transform.position, Quaternion.identity, transform);
+                        node.GetComponent<Nodes>().Init(new Vector3(hexcod.x, 0, hexcod.y));
+                    }
+                    else if (noiseValue > treePropability)
+                    {
+                        GameObject waterNode = Instantiate(GroundNode, transform.position, Quaternion.identity, transform);
+                        waterNode.GetComponent<Nodes>().Init(new Vector3(hexcod.x, noiseValue * 2, hexcod.y));
+                    }
+                    else
+                    {
+                        GameObject node = Instantiate(TreeNode, transform.position, Quaternion.identity, transform);
+                        node.GetComponent<Nodes>().Init(new Vector3(hexcod.x, noiseValue  *2, hexcod.y));
+                    }
                 }
             }
         }
