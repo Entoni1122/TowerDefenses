@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace TowerDefense
@@ -20,19 +18,22 @@ namespace TowerDefense
         public Vector3 postoTo;
         public Vector3 startingPos;
 
+        Color colors;
         private void Start()
         {
             objRend = GetComponent<Renderer>();
             startingColor = objRend.material.color;
             startingPos = transform.position;
             TurretBuildOn = null;
+            GetComponent<MeshRenderer>().sharedMaterial.color = colors;
         }
 
-        public void Init(Vector3 pos,float yScale)
+        public void Init(Vector3 pos,float yScale,Color color)
         {
             postoTo = pos;
             print(yScale);
             transform.localScale = new Vector3(transform.localScale.x,yScale,transform.localScale.z);
+            colors = color;
         }
         private void Update()
         {
@@ -50,7 +51,7 @@ namespace TowerDefense
         }
         private void OnMouseExit()
         {
-            GetComponent<MeshRenderer>().material.color = startingColor;
+            GetComponent<MeshRenderer>().material.color = colors;
         }
 
         private void OnMouseDown()

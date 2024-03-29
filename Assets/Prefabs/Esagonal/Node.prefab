@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5559909550344270299}
   - component: {fileID: 4039480849260074133}
   m_Layer: 0
-  m_Name: Mountain
+  m_Name: Node
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -63,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a0ccb2368bc992f48801b00ccc2614d0, type: 2}
+  - {fileID: 2100000, guid: aad5b228d92c0e84db1aa74b269b011e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
