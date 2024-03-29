@@ -11,14 +11,21 @@ namespace TowerDefense
         public int Column;
         public float xOffset, yOffset;
 
+        [SerializeField] GameObject DeepWater;
         [SerializeField] GameObject WaterNode;
         [SerializeField] GameObject GroundNode;
         [SerializeField] GameObject TreeNode;
+        [SerializeField] GameObject SnowNode;
 
+
+        [SerializeField] int randomSeed = 1;
         //Noise diopo
         [SerializeField] float noiseFrequency = 10f;
+        [SerializeField] float deepWaterPropability;
         [SerializeField] float waterPropability;
         [SerializeField] float treePropability;
+        [SerializeField] float groundProb;
+        [SerializeField] float SnowPropability;
 
 
         private void Start()
@@ -28,30 +35,45 @@ namespace TowerDefense
 
         void CreateMap()
         {
+            if (randomSeed == 1)
+            {
+                randomSeed = Random.Range(1,10000);
+            }
+
             for (int i = 0; i < Column; i++)
             {
                 for (int j = 0; j < Row; j++)
                 {
                     Vector2 hexcod = GetHexPosition(i, j);
-
-                    float noiseValue = Mathf.PerlinNoise(hexcod.x / noiseFrequency, hexcod.y / noiseFrequency);
+                    
+                    float noiseValue = Mathf.PerlinNoise((hexcod.x + randomSeed) / noiseFrequency, (hexcod.y + randomSeed) / noiseFrequency);
 
                     float UpScale = 0;
                     GameObject tileToPlace = null;
-
-                    if (noiseValue < waterPropability)
+                    if (noiseValue < deepWaterPropability)
+                    {
+                        tileToPlace = DeepWater;
+                        UpScale = noiseValue * 8;
+                    }
+                    else if (noiseValue < waterPropability)
                     {
                         tileToPlace = WaterNode;
+                        UpScale = noiseValue * 10;
                     }
-                    else if (noiseValue > treePropability)
+                    else if (noiseValue < treePropability)
                     {
-                        tileToPlace = GroundNode;
-                        UpScale = noiseValue * 4;
-                    }
-                    else
-                    {
-                        UpScale = noiseValue * 4;
                         tileToPlace = TreeNode;
+                        UpScale = noiseValue * 12;
+                    }
+                    else if (noiseValue < groundProb)
+                    {
+                        UpScale = noiseValue * 15;
+                        tileToPlace = GroundNode;
+                    }
+                    else 
+                    {
+                        UpScale = noiseValue * 18;
+                        tileToPlace = SnowNode;
                     }
                     GameObject node = Instantiate(tileToPlace, transform.position, Quaternion.identity, transform);
                     node.GetComponent<Nodes>().Init(new Vector3(hexcod.x, 0, hexcod.y),UpScale);

@@ -32,7 +32,7 @@ namespace TowerDefense
         {
             postoTo = pos;
             print(yScale);
-            transform.localScale.Scale(new Vector3(1,yScale,1));
+            transform.localScale = new Vector3(transform.localScale.x,yScale,transform.localScale.z);
         }
         private void Update()
         {

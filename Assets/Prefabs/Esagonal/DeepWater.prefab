@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5559909550344270299}
   - component: {fileID: 4039480849260074133}
   m_Layer: 0
-  m_Name: Mountain
+  m_Name: DeepWater
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -63,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a0ccb2368bc992f48801b00ccc2614d0, type: 2}
+  - {fileID: 2100000, guid: 1a39a5bd0ecc4e743967c1bbbdf6be63, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -104,8 +104,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 0.4085739, z: 1.700189}
-  m_Center: {x: 0, y: 0.19384705, z: -0.002494971}
+  m_Size: {x: 1, y: 0.427821, z: 1.700189}
+  m_Center: {x: 0, y: 0.1790647, z: -0.002494971}
 --- !u!114 &4039480849260074133
 MonoBehaviour:
   m_ObjectHideFlags: 0

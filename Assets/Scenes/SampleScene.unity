@@ -1511,19 +1511,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8662c14f57432264a9cd10af7b53a1fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Row: 20
-  Column: 20
-  xOffset: 3
-  yOffset: 3
+  Row: 30
+  Column: 30
+  xOffset: 2.8
+  yOffset: 2.8
+  DeepWater: {fileID: 1446122073190096872, guid: 6e0de6098c932ff4fa16195bbb9a00df,
+    type: 3}
   WaterNode: {fileID: 1446122073190096872, guid: 06aed74688adda64ab9e485e4e54f4f5,
     type: 3}
   GroundNode: {fileID: 1446122073190096872, guid: ba5c10e94d8b84c40b963fadcd1a9e5b,
     type: 3}
   TreeNode: {fileID: 1446122073190096872, guid: ee814915e47f87d4cac197e3def1b1a8,
     type: 3}
-  noiseFrequency: 20
-  waterPropability: 0.35
+  SnowNode: {fileID: 1446122073190096872, guid: ef1297b3fdb36ce46a989439c1fd3908,
+    type: 3}
+  randomSeed: 1
+  noiseFrequency: 30
+  deepWaterPropability: 0.2
+  waterPropability: 0.4
   treePropability: 0.6
+  groundProb: 0.8
+  SnowPropability: 0.95
 --- !u!1 &1016580209
 GameObject:
   m_ObjectHideFlags: 0
