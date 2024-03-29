@@ -28,9 +28,11 @@ namespace TowerDefense
             TurretBuildOn = null;
         }
 
-        public void Init(Vector3 pos)
+        public void Init(Vector3 pos,float yScale)
         {
             postoTo = pos;
+            print(yScale);
+            transform.localScale.Scale(new Vector3(1,yScale,1));
         }
         private void Update()
         {

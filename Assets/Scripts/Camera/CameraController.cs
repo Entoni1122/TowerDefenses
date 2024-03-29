@@ -10,7 +10,7 @@ namespace TowerDefense
 
         public float borderTreshold;
 
-        private bool bShouldCameraMove = true;
+        private bool bShouldCameraMove;
 
         void Update()
         {

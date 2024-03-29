@@ -25,7 +25,7 @@ namespace TowerDefense
             {
                 Vector3 posToGo = new Vector3(xOffset * (i / Column), 0, yOffset * (i % Row));
                 GameObject node = Instantiate(Node, transform.position, Quaternion.identity, transform);
-                node.GetComponent<Nodes>().Init(posToGo);
+                //node.GetComponent<Nodes>().Init(posToGo);
 
             }
         }

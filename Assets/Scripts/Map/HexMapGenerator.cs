@@ -36,23 +36,25 @@ namespace TowerDefense
 
                     float noiseValue = Mathf.PerlinNoise(hexcod.x / noiseFrequency, hexcod.y / noiseFrequency);
 
-                    float gg = (j * i) + Column;
+                    float UpScale = 0;
+                    GameObject tileToPlace = null;
 
                     if (noiseValue < waterPropability)
                     {
-                        GameObject node = Instantiate(WaterNode, transform.position, Quaternion.identity, transform);
-                        node.GetComponent<Nodes>().Init(new Vector3(hexcod.x, 0, hexcod.y));
+                        tileToPlace = WaterNode;
                     }
                     else if (noiseValue > treePropability)
                     {
-                        GameObject waterNode = Instantiate(GroundNode, transform.position, Quaternion.identity, transform);
-                        waterNode.GetComponent<Nodes>().Init(new Vector3(hexcod.x, noiseValue * 2, hexcod.y));
+                        tileToPlace = GroundNode;
+                        UpScale = noiseValue * 4;
                     }
                     else
                     {
-                        GameObject node = Instantiate(TreeNode, transform.position, Quaternion.identity, transform);
-                        node.GetComponent<Nodes>().Init(new Vector3(hexcod.x, noiseValue  *2, hexcod.y));
+                        UpScale = noiseValue * 4;
+                        tileToPlace = TreeNode;
                     }
+                    GameObject node = Instantiate(tileToPlace, transform.position, Quaternion.identity, transform);
+                    node.GetComponent<Nodes>().Init(new Vector3(hexcod.x, 0, hexcod.y),UpScale);
                 }
             }
         }

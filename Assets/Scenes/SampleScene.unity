@@ -672,8 +672,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b120f76c6cfbfaa4a9fcbd73be66b3c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraSpeed: 4
-  borderTreshold: 10
+  cameraSpeed: 10
+  borderTreshold: 5
 --- !u!1 &386833005
 GameObject:
   m_ObjectHideFlags: 0
