@@ -12,13 +12,13 @@ namespace TowerDefense
 
         [Header("Build Child")]
         [SerializeField] GameObject TurretBuildOn;
-
         public float costToBuild;
 
-        public Vector3 postoTo;
+        [Header("Utilities")]
+        public Vector3 PosToGo;
         public Vector3 startingPos;
-
         Color colors;
+
         private void Start()
         {
             objRend = GetComponent<Renderer>();
@@ -30,18 +30,18 @@ namespace TowerDefense
 
         public void Init(Vector3 pos,float yScale,Color color)
         {
-            postoTo = pos;
+            PosToGo = pos;
             print(yScale);
             transform.localScale = new Vector3(transform.localScale.x,yScale,transform.localScale.z);
             colors = color;
         }
         private void Update()
         {
-            transform.position = Vector3.Lerp(transform.position,postoTo,Time.deltaTime * 5);
-            float dist = Vector3.Distance(transform.position, postoTo);   
+            transform.position = Vector3.Lerp(transform.position,PosToGo,Time.deltaTime * 5);
+            float dist = Vector3.Distance(transform.position, PosToGo);   
             if (dist <= 0.4f)
             {
-                transform.position = postoTo;
+                transform.position = PosToGo;
             }
         }
 
@@ -63,9 +63,10 @@ namespace TowerDefense
             }
             else if (PlayerStats.Instance.Coin >= costToBuild)
             {
-                PlayerStats.Instance.RemoveMoney(costToBuild);
                 GameObject turret = BuildingManager.Instance.GetTurretToBuild();
-                TurretBuildOn = Instantiate(turret, transform.position + new Vector3(0, 1, 0), transform.rotation);
+                TurretBuildOn = Instantiate(turret, transform.position + new Vector3(0, 40f, 0), transform.rotation);
+                float cost = turret.GetComponent<Turretbehaviour>().costToBuild;
+                PlayerStats.Instance.RemoveMoney(cost);
                 return;
             }
             print("Not enough money");

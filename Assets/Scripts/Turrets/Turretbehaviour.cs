@@ -14,26 +14,40 @@ namespace TowerDefense
         public float CheckForEnemiesRadius;
         public float TurnSpeed;
         public LayerMask Enemy;
+        Vector3 PositionToLand;
 
         [Header("FireGunVariable")]
         [SerializeField] Transform Muzzle;
         [SerializeField] GameObject Bullet;
         public float FireRate;
         private float FireTimer = 0;
+        public float costToBuild;
         public int DMG;
 
         [Header("UI Stuff")]
         public float UpgradeCost;
         public float SellCost;
 
-
+        private void Start()
+        {
+            AnimationOnSpawn();
+        }
         void Update()
         {
+            transform.position = Vector3.Lerp(transform.position,PositionToLand,10f * Time.deltaTime);
             CheckForNearestEnemy();
             RotateTowardsNearestEnemy();
             CheckToShoot();
         }
 
+        void AnimationOnSpawn()
+        {
+            RaycastHit hit;
+            if (Physics.Raycast(transform.position,Vector3.down * 200f,out hit))
+            {
+                PositionToLand = hit.point;
+            }
+        }
         void CheckForNearestEnemy()
         {
             Collider[] enemies = Physics.OverlapSphere(transform.position, CheckForEnemiesRadius, Enemy);

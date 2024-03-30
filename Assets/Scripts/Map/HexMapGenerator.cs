@@ -7,15 +7,16 @@ namespace TowerDefense
 {
     public class HexMapGenerator : MonoBehaviour
     {
+        [Header("MapInfo")]
         public int Row;
         public int Column;
         public float xOffset, yOffset;
-
         [SerializeField] GameObject Node;
 
+        [Space]
 
+        [Header("NoiseInfo")]
         [SerializeField] int randomSeed = 1;
-        //Noise diopo
         [SerializeField] float noiseFrequency = 10f;
         [SerializeField] float deepWaterPropability;
         [SerializeField] float waterPropability;
@@ -23,10 +24,11 @@ namespace TowerDefense
         [SerializeField] float groundProb;
         [SerializeField] float SnowPropability;
 
+        [Space]
 
+        [Header("ColorsInfo")]
         public Gradient test;
         public AnimationCurve animationCurve;
-        public float yNoise;
 
 
         private void Start()
@@ -81,7 +83,6 @@ namespace TowerDefense
                 }
             }
         }
-
         Vector2 GetHexPosition(int x, int z)
         {
             float xPos = x * xOffset * Mathf.Cos(Mathf.Deg2Rad * 30);

@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1477341132907501128}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -194,6 +194,7 @@ MonoBehaviour:
   Muzzle: {fileID: 6568175772439231562}
   Bullet: {fileID: 8135180516128837055, guid: a6236f4f325aa9d4bbf49284a5b9141b, type: 3}
   FireRate: 1
+  costToBuild: 0
   DMG: 1
   UpgradeCost: 50
   SellCost: 20
