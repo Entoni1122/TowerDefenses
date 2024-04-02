@@ -3,7 +3,7 @@ using UnityEngine;
 namespace TowerDefense
 {
     [RequireComponent(typeof(Collider))]
-    public class Nodes : MonoBehaviour
+    public class Nodes : MonoBehaviour, I_interactable
     {
         [Header("On Mouse Hover Color")]
         public Color HoverColor;
@@ -28,33 +28,34 @@ namespace TowerDefense
             GetComponent<MeshRenderer>().sharedMaterial.color = colors;
         }
 
-        public void Init(Vector3 pos,float yScale,Color color)
+        public void Init(Vector3 pos, float yScale, Color color)
         {
             PosToGo = pos;
             print(yScale);
-            transform.localScale = new Vector3(transform.localScale.x,yScale,transform.localScale.z);
+            transform.localScale = new Vector3(transform.localScale.x, yScale, transform.localScale.z);
             colors = color;
         }
         private void Update()
         {
-            transform.position = Vector3.Lerp(transform.position,PosToGo,Time.deltaTime * 5);
-            float dist = Vector3.Distance(transform.position, PosToGo);   
+            transform.position = Vector3.Lerp(transform.position, PosToGo, Time.deltaTime * 5);
+            float dist = Vector3.Distance(transform.position, PosToGo);
             if (dist <= 0.4f)
             {
                 transform.position = PosToGo;
             }
         }
 
-        private void OnMouseEnter()
+        #region MouseBehaviour
+        public void OnMouseHover()
         {
             objRend.material.color = HoverColor;
         }
         private void OnMouseExit()
         {
             GetComponent<MeshRenderer>().material.color = colors;
+            
         }
-
-        private void OnMouseDown()
+        public void OnMouseLeftClick()
         {
             if (TurretBuildOn != null)
             {
@@ -73,13 +74,16 @@ namespace TowerDefense
 
         }
 
-        private void OnCollisionEnter(Collision collision)
+        public void OnMouseRightClick()
         {
-            if (collision.gameObject.layer == LayerMask.NameToLayer("Spawner"))
-            {
-                print("SomeOneEntered");
-                Destroy(gameObject);
-            }
+            print("Right clicking doesnt do shit......................for now");
         }
+
+        public void OnMouseUnhover()
+        {
+            
+        }
+        #endregion
+    
     }
 }

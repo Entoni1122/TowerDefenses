@@ -63,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: aad5b228d92c0e84db1aa74b269b011e, type: 2}
+  - {fileID: 2100000, guid: 66e2996064ada464c863deaa925d615a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -149,7 +149,7 @@ GameObject:
   - component: {fileID: 3836106256859671630}
   - component: {fileID: 5390684351809025547}
   m_Layer: 8
-  m_Name: Turret
+  m_Name: Mortaio
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -186,17 +186,17 @@ MonoBehaviour:
   Enemies: []
   RotatingBase: {fileID: 8329146215610048982}
   Target: {fileID: 0}
-  CheckForEnemiesRadius: 7
-  TurnSpeed: 10
+  CheckForEnemiesRadius: 20
+  TurnSpeed: 2
   Enemy:
     serializedVersion: 2
     m_Bits: 64
   Muzzle: {fileID: 6568175772439231562}
   Bullet: {fileID: 8135180516128837055, guid: a6236f4f325aa9d4bbf49284a5b9141b, type: 3}
-  FireRate: 1
-  costToBuild: 0
-  DMG: 1
-  UpgradeCost: 50
+  FireRate: 0.2
+  costToBuild: 100
+  DMG: 2
+  UpgradeCost: 80
   SellCost: 20
 --- !u!65 &5390684351809025547
 BoxCollider:

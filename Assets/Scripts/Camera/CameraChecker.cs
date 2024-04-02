@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 
 namespace TowerDefense
@@ -24,19 +25,50 @@ namespace TowerDefense
 
             if (Physics.Raycast(transform.position, Camera.main.ScreenPointToRay(Input.mousePosition).direction, out hit, 200f))
             {
-                if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Turret"))
+                if (!EventSystem.current.IsPointerOverGameObject())
                 {
-                    if (Input.GetKeyDown(KeyCode.Mouse1))
+                    if (hit.transform.gameObject.layer == LayerMask.NameToLayer("HexagonNode"))
                     {
-                        Target = hit.transform.gameObject;
-                        upgradeMenu.SetActive(true);
-                        upgradeMenu.transform.position = Input.mousePosition;
-                        UpdateTurretData(hit.transform.gameObject);
-                        return;
+                        hit.transform.GetComponent<Nodes>().OnMouseHover();
+                        if (Input.GetKeyDown(KeyCode.Mouse0))
+                        {
+                            hit.transform.GetComponent<Nodes>().OnMouseLeftClick();
+                            ActivateUpgradeMenu(false);
+                        }
+                    }
+
+
+                    if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Turret"))
+                    {
+                        if (Input.GetKeyDown(KeyCode.Mouse1))
+                        {
+                            Target = hit.transform.gameObject;
+                            ActivateUpgradeMenu(true);
+                            UpdateTurretData(hit.transform.gameObject);
+                            return;
+                        }
                     }
                 }
             }
         }
+        void ActivateUpgradeMenu(bool show)
+        {
+            if (!show)
+            {
+                upgradeMenu.SetActive(false);
+                return;
+            }
+            upgradeMenu.SetActive(true);
+            upgradeMenu.transform.position = Input.mousePosition;
+        }
+        void UpdateTurretData(GameObject hit)
+        {
+            Turretbehaviour turretData = hit.transform.GetComponent<Turretbehaviour>();
+            upgradeButton.text = "Upgrade: " + turretData.UpgradeCost.ToString();
+            sellButton.text = "Sell: " + turretData.SellCost.ToString();
+        }
+
+        #region ButtonFunctionality
         public void ButtonClicked()
         {
             if (Target != null)
@@ -60,11 +92,12 @@ namespace TowerDefense
             }
 
         }
-        void UpdateTurretData(GameObject hit)
+        public void ExitMenuButton()
         {
-            Turretbehaviour turretData = hit.transform.GetComponent<Turretbehaviour>();
-            upgradeButton.text = "Upgrade: " + turretData.UpgradeCost.ToString();
-            sellButton.text = "Sell: " + turretData.SellCost.ToString();
+            upgradeMenu.SetActive(true);
         }
+        #endregion
+
+
     }
 }

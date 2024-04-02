@@ -122,6 +122,7 @@ namespace TowerDefense
         {
             if (PlayerStats.Instance.Coin >= UpgradeCost)
             {
+                transform.localScale += new Vector3(1,1,1);
                 PlayerStats.Instance.Coin -= UpgradeCost;
                 PlayerStats.Instance.UdpateStats();
                 UpgradeCost += 50;
