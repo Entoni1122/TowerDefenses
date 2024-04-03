@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 386927060800171482}
   - component: {fileID: 2062474763167615230}
   - component: {fileID: 5559909550344270299}
-  - component: {fileID: 4039480849260074133}
-  m_Layer: 9
-  m_Name: Node
+  - component: {fileID: 8793527911089324293}
+  m_Layer: 4
+  m_Name: EnemyHexagon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28,8 +28,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1446122073190096872}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.11, y: 0, z: 0}
-  m_LocalScale: {x: 1.5, y: 1, z: 1.5}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.5, y: 10, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -63,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: aad5b228d92c0e84db1aa74b269b011e, type: 2}
+  - {fileID: 2100000, guid: 66e2996064ada464c863deaa925d615a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -104,9 +104,9 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 0.4085739, z: 1.700189}
-  m_Center: {x: 0, y: 0.19384705, z: -0.002494971}
---- !u!114 &4039480849260074133
+  m_Size: {x: 2.0271244, y: 0.40857393, z: 1.700189}
+  m_Center: {x: 0.0018402736, y: 0.19384705, z: -0.002494971}
+--- !u!114 &8793527911089324293
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -115,11 +115,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 1446122073190096872}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b8361e6b9c591644bd766f0f9beaf45, type: 3}
+  m_Script: {fileID: 11500000, guid: 0e3dfe51dbfb3cd489f0c92c2915da38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HoverColor: {r: 1, g: 0.91008675, b: 0, a: 0.2784314}
-  TurretBuildOn: {fileID: 0}
-  costToBuild: 100
-  PosToGo: {x: 0, y: 0, z: 0}
-  startingPos: {x: 0, y: 0, z: 0}

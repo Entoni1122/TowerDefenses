@@ -12,16 +12,16 @@ namespace TowerDefense
 
         private void Start()
         {
-            nodeToGO = PathManager.nodes[nodeIndex];
+            nodeToGO = PathManager.HexagonEnemyDIOPO[nodeIndex].transform;
         }
 
         private void Update()
         {
-            Vector3 direction = ((nodeToGO.transform.position) - transform.position).normalized * speed * Time.deltaTime;
+            Vector3 direction = ((nodeToGO.transform.position + Vector3.up * 5f) - transform.position).normalized * speed * Time.deltaTime;
 
             transform.Translate(direction, Space.World);
 
-            if (Vector3.Distance(transform.position, nodeToGO.position) < switchTargetDistance)
+            if (Vector3.Distance(transform.position, nodeToGO.position + Vector3.up * 5f) < switchTargetDistance)
             {
                 Reachedtarget();
             }
@@ -29,13 +29,13 @@ namespace TowerDefense
 
         void Reachedtarget()
         {
-            if (nodeIndex >= PathManager.nodes.Count - 1)
+            if (nodeIndex >= PathManager.HexagonEnemyDIOPO.Count - 1)
             {
                 Destroy(gameObject);
                 return;
             }
             nodeIndex++;
-            nodeToGO = PathManager.nodes[nodeIndex];
+            nodeToGO = PathManager.HexagonEnemyDIOPO[nodeIndex].transform;
         }
     }
 }

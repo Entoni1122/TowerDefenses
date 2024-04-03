@@ -33,7 +33,7 @@ namespace TowerDefense
         public AnimationCurve animationCurve;
 
         List<PathNode> nodeList = new List<PathNode>();
-
+        public List<GameObject> WorldHexagon = new List<GameObject>();
 
         [SerializeField] Material _material;
 
@@ -51,10 +51,12 @@ namespace TowerDefense
                 Testing(nodeList[randomStart], nodeList[RandmoEnd]);
             }
         }
+        [SerializeField] GameObject EnemyHexagonPrefab;
+
+        List<Transform> EnemyHexagon = new List<Transform>();
         void Testing(PathNode start, PathNode end)
         {
             List<PathNode> find = FindPath(start, end);
-            List<Transform> enemy = new List<Transform>();
             if (find != null)
             {
                 if (find.Count <= 0)
@@ -63,11 +65,14 @@ namespace TowerDefense
                 }
                 for (int i = 0; i < find.Count - 1; i++)
                 {
-                    transform.GetChild(find[i].yPos * Row + find[i].xPos).GetComponent<MeshRenderer>().material = _material;
-                    enemy.Add(transform.GetChild(find[i].yPos * Row + find[i].xPos));
-                    transform.GetChild(find[i].yPos * Row + find[i].xPos).gameObject.layer = 1;
+                    //Adding the path to the enemy pathing
+                    EnemyHexagon.Add(transform.GetChild(find[i].yPos * Row + find[i].xPos));
+                    WorldHexagon[find[i].yPos * Row + find[i].xPos].gameObject.SetActive(false);
+                    GameObject NODO = Instantiate(EnemyHexagonPrefab, WorldHexagon[find[i].yPos * Row + find[i].xPos].transform.position + Vector3.up * 10, Quaternion.identity, transform);
+                    PathManager.HexagonEnemyDIOPO.Add(NODO);
                 }
-                PathManager.nodes = enemy;
+                PathManager.nodes = EnemyHexagon;
+                
             }
             print("Find Path is null");
         }
@@ -118,6 +123,7 @@ namespace TowerDefense
                         walkbale = false;
                     }
                     GameObject node = Instantiate(tileToPlace, transform.position, Quaternion.identity, transform);
+                    WorldHexagon.Add(node);
                     node.GetComponent<Nodes>().Init(new Vector3(hexcod.x, 0, hexcod.y), UpScale, test.Evaluate(noiseValue), walkbale);
                     node.GetComponent<Nodes>().pathNode.xPos = j;
                     node.GetComponent<Nodes>().pathNode.yPos = i;
@@ -134,6 +140,7 @@ namespace TowerDefense
                     nodeList.Add(node.GetComponent<Nodes>().pathNode);
                 }
             }
+            print(transform.childCount);
         }
 
         Vector2 GetHexPosition(int x, int z)
@@ -223,7 +230,7 @@ namespace TowerDefense
                         continue;
                     }
 
-                    int checkX = node.xPos + i + 1;
+                    int checkX = node.xPos + i;
                     int checkY = node.yPos + z;
 
                     if (checkX >= 0 && checkX < Row && checkY >= 0 && checkY < Column)

@@ -29,11 +29,14 @@ namespace TowerDefense
                 {
                     if (hit.transform.gameObject.layer == LayerMask.NameToLayer("HexagonNode"))
                     {
-                        hit.transform.GetComponent<Nodes>().OnMouseHover();
-                        if (Input.GetKeyDown(KeyCode.Mouse0))
+                        if (hit.transform.gameObject != null)
                         {
-                            hit.transform.GetComponent<Nodes>().OnMouseLeftClick();
-                            ActivateUpgradeMenu(false);
+                            hit.transform.GetComponent<Nodes>().OnMouseHover();
+                            if (Input.GetKeyDown(KeyCode.Mouse0))
+                            {
+                                hit.transform.GetComponent<Nodes>().OnMouseLeftClick();
+                                ActivateUpgradeMenu(false);
+                            }
                         }
                     }
 
