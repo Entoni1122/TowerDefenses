@@ -42,12 +42,47 @@ namespace TowerDefense
         {
             if (Input.GetKeyDown(KeyCode.G))
             {
+                PathNode starting = new PathNode();
+                PathNode ending = new PathNode();
+
+                //for (int i = 0; i < nodeList.Count; i++)
+                //{
+                //    if (nodeList[i].isWalkable == true)
+                //    {
+                //        starting = nodeList[i];
+                //        break;
+                //    }
+                //}
+
+                //for (int i = nodeList.Count - 1; i > 0; i--)
+                //{
+                //    if (nodeList[i].isWalkable == true)
+                //    {
+                //        ending = nodeList[i];
+                //        break;
+                //    }
+                //}
+
                 Testing(nodeList[0], nodeList[nodeList.Count - 1]);
             }
         }
         void Testing(PathNode start, PathNode end)
         {
-            FindPath(start, end);
+            List<PathNode> find = FindPath(start, end);
+
+            if (find == null)
+            {
+                print("Find Path is null");
+                return;
+            }
+            if (find.Count <= 0)
+            {
+                return;
+            }
+            for (int i = 0; i < find.Count; i++)
+            {
+                transform.GetChild(find[i].yPos * Row + find[i].xPos).GetComponent<MeshRenderer>().material.color = Color.red;
+            }
         }
 
 
@@ -88,7 +123,7 @@ namespace TowerDefense
                     {
                         UpScale = animationCurve.Evaluate(noiseValue);
                         tileToPlace = Node;
-                        walkbale = false;
+                        
                     }
                     else
                     {
@@ -131,7 +166,6 @@ namespace TowerDefense
         {
             toSearch.Add(start);
 
-
             while (toSearch.Count > 0)
             {
                 PathNode current = toSearch[0];
@@ -148,6 +182,7 @@ namespace TowerDefense
 
                 if (current == end)
                 {
+                    print("Find Path");
                     return GetTruePath(start, end);
                 }
 
@@ -186,10 +221,6 @@ namespace TowerDefense
             }
             node.Reverse();
 
-            for (int i = 0; i < node.Count; i++)
-            {
-                print(node[i].xPos + " " + node[i].yPos);
-            }
             return node;
         }
 
@@ -224,7 +255,7 @@ namespace TowerDefense
             int dstX = Mathf.Abs(nodeA.xPos - nodeB.xPos);
             int dstY = Mathf.Abs(nodeA.yPos - nodeB.yPos);
 
-            return dstX + dstY;
+            return dstX  + dstY;
         }
 
     }
