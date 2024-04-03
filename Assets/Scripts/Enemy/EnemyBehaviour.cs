@@ -17,7 +17,7 @@ namespace TowerDefense
 
         private void Update()
         {
-            Vector3 direction = (nodeToGO.transform.position - transform.position).normalized * speed * Time.deltaTime;
+            Vector3 direction = ((nodeToGO.transform.position) - transform.position).normalized * speed * Time.deltaTime;
 
             transform.Translate(direction, Space.World);
 
@@ -29,7 +29,7 @@ namespace TowerDefense
 
         void Reachedtarget()
         {
-            if (nodeIndex >= PathManager.nodes.Length - 1)
+            if (nodeIndex >= PathManager.nodes.Count - 1)
             {
                 Destroy(gameObject);
                 return;

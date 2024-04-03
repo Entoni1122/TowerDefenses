@@ -136,4 +136,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2
-  switchTargetDistance: 0.4
+  switchTargetDistance: 2

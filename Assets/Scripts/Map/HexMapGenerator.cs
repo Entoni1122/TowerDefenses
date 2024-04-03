@@ -24,6 +24,7 @@ namespace TowerDefense
         [SerializeField] float treePropability;
         [SerializeField] float groundProb;
         [SerializeField] float SnowPropability;
+        [SerializeField] GameObject enemyPath;
 
         [Space]
 
@@ -32,7 +33,6 @@ namespace TowerDefense
         public AnimationCurve animationCurve;
 
         List<PathNode> nodeList = new List<PathNode>();
-
         private void Start()
         {
             CreateMap();
@@ -42,27 +42,6 @@ namespace TowerDefense
         {
             if (Input.GetKeyDown(KeyCode.G))
             {
-                PathNode starting = new PathNode();
-                PathNode ending = new PathNode();
-
-                //for (int i = 0; i < nodeList.Count; i++)
-                //{
-                //    if (nodeList[i].isWalkable == true)
-                //    {
-                //        starting = nodeList[i];
-                //        break;
-                //    }
-                //}
-
-                //for (int i = nodeList.Count - 1; i > 0; i--)
-                //{
-                //    if (nodeList[i].isWalkable == true)
-                //    {
-                //        ending = nodeList[i];
-                //        break;
-                //    }
-                //}
-
                 Testing(nodeList[0], nodeList[nodeList.Count - 1]);
             }
         }
@@ -79,9 +58,11 @@ namespace TowerDefense
             {
                 return;
             }
-            for (int i = 0; i < find.Count; i++)
+            for (int i = 0; i < find.Count - 1; i++)
             {
                 transform.GetChild(find[i].yPos * Row + find[i].xPos).GetComponent<MeshRenderer>().material.color = Color.red;
+                transform.GetChild(find[i].yPos * Row + find[i].xPos).gameObject.layer = 1;
+                PathManager.nodes.Add(transform.GetChild(find[i].yPos * Row + find[i].xPos));
             }
         }
 
@@ -237,7 +218,7 @@ namespace TowerDefense
                         continue;
                     }
 
-                    int checkX = node.xPos + i;
+                    int checkX = node.xPos + i +1;
                     int checkY = node.yPos + z;
 
                     if (checkX >= 0 && checkX < Row && checkY >= 0 && checkY < Column)

@@ -1,18 +1,38 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PathManager : MonoBehaviour
 {
-    public static Transform[] nodes;
+    public static List<Transform> nodes;
+    bool startSpawning;
 
-    private void Awake()
+    float timer;
+    public float timeToSpawn;
+
+    [SerializeField] GameObject enemy;
+
+    private void Start()
     {
-        nodes = new Transform[transform.childCount];
-
-        for(int i = 0; i < nodes.Length; i++)
+        nodes = new List<Transform>();
+    }
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.P))
         {
-            nodes[i] = transform.GetChild(i);
+            startSpawning = true;
         }
+
+        if (startSpawning)
+        {
+            timer -= Time.deltaTime;
+            if (timer < 0)
+            {
+                Instantiate(enemy, transform.position, Quaternion.identity, transform);
+                timer = timeToSpawn;
+            }
+        }
+
     }
 }
