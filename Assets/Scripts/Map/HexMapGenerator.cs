@@ -33,6 +33,10 @@ namespace TowerDefense
         public AnimationCurve animationCurve;
 
         List<PathNode> nodeList = new List<PathNode>();
+
+
+        [SerializeField] Material _material;
+
         private void Start()
         {
             CreateMap();
@@ -42,28 +46,30 @@ namespace TowerDefense
         {
             if (Input.GetKeyDown(KeyCode.G))
             {
-                Testing(nodeList[0], nodeList[nodeList.Count - 1]);
+                int RandmoEnd = Random.Range((Row * Column) / 2, nodeList.Count);
+                int randomStart = Random.Range(1, 2);
+                Testing(nodeList[randomStart], nodeList[RandmoEnd]);
             }
         }
         void Testing(PathNode start, PathNode end)
         {
             List<PathNode> find = FindPath(start, end);
-
-            if (find == null)
+            List<Transform> enemy = new List<Transform>();
+            if (find != null)
             {
-                print("Find Path is null");
-                return;
+                if (find.Count <= 0)
+                {
+                    return;
+                }
+                for (int i = 0; i < find.Count - 1; i++)
+                {
+                    transform.GetChild(find[i].yPos * Row + find[i].xPos).GetComponent<MeshRenderer>().material = _material;
+                    enemy.Add(transform.GetChild(find[i].yPos * Row + find[i].xPos));
+                    transform.GetChild(find[i].yPos * Row + find[i].xPos).gameObject.layer = 1;
+                }
+                PathManager.nodes = enemy;
             }
-            if (find.Count <= 0)
-            {
-                return;
-            }
-            for (int i = 0; i < find.Count - 1; i++)
-            {
-                transform.GetChild(find[i].yPos * Row + find[i].xPos).GetComponent<MeshRenderer>().material.color = Color.red;
-                transform.GetChild(find[i].yPos * Row + find[i].xPos).gameObject.layer = 1;
-                PathManager.nodes.Add(transform.GetChild(find[i].yPos * Row + find[i].xPos));
-            }
+            print("Find Path is null");
         }
 
 
@@ -104,7 +110,6 @@ namespace TowerDefense
                     {
                         UpScale = animationCurve.Evaluate(noiseValue);
                         tileToPlace = Node;
-                        
                     }
                     else
                     {
@@ -116,7 +121,7 @@ namespace TowerDefense
                     node.GetComponent<Nodes>().Init(new Vector3(hexcod.x, 0, hexcod.y), UpScale, test.Evaluate(noiseValue), walkbale);
                     node.GetComponent<Nodes>().pathNode.xPos = j;
                     node.GetComponent<Nodes>().pathNode.yPos = i;
-                    node.GetComponent<Nodes>().pathNode.Gcost = 0;
+                    node.GetComponent<Nodes>().pathNode.Gcost = int.MaxValue;
                     node.GetComponent<Nodes>().pathNode.Hcost = 0;
                     int parentIndex = i * Row + j;
                     if (parentIndex == 0)
@@ -218,7 +223,7 @@ namespace TowerDefense
                         continue;
                     }
 
-                    int checkX = node.xPos + i +1;
+                    int checkX = node.xPos + i + 1;
                     int checkY = node.yPos + z;
 
                     if (checkX >= 0 && checkX < Row && checkY >= 0 && checkY < Column)
@@ -236,7 +241,7 @@ namespace TowerDefense
             int dstX = Mathf.Abs(nodeA.xPos - nodeB.xPos);
             int dstY = Mathf.Abs(nodeA.yPos - nodeB.yPos);
 
-            return dstX  + dstY;
+            return dstX + dstY;
         }
 
     }
