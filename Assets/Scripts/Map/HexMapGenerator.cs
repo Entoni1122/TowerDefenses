@@ -80,6 +80,7 @@ namespace TowerDefense
                     }
                     GameObject node = Instantiate(tileToPlace, transform.position, Quaternion.identity, transform);
                     node.GetComponent<Nodes>().Init(new Vector3(hexcod.x, 0, hexcod.y), UpScale, test.Evaluate(noiseValue));
+                    
                 }
             }
         }
