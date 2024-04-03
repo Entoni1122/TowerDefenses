@@ -9,7 +9,6 @@ namespace TowerDefense
         public int xPos;
         public int yPos;
 
-
         public int Gcost;
         public int Hcost;
         public int Fcost => Gcost + Hcost;

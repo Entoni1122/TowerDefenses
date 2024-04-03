@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace TowerDefense
@@ -19,6 +20,13 @@ namespace TowerDefense
         public Vector3 startingPos;
         Color colors;
 
+        public PathNode pathNode;
+
+        private void Awake()
+        {
+            pathNode = new PathNode();
+            
+        }
         private void Start()
         {
             objRend = GetComponent<Renderer>();
@@ -28,12 +36,12 @@ namespace TowerDefense
             GetComponent<MeshRenderer>().sharedMaterial.color = colors;
         }
 
-        public void Init(Vector3 pos, float yScale, Color color)
+        public void Init(Vector3 pos, float yScale, Color color,bool walkable)
         {
             PosToGo = pos;
-            print(yScale);
-            transform.localScale = new Vector3(transform.localScale.x, yScale, transform.localScale.z);
             colors = color;
+            pathNode.isWalkable = walkable;
+            transform.localScale = new Vector3(transform.localScale.x, yScale, transform.localScale.z);
         }
         private void Update()
         {

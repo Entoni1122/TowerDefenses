@@ -35,13 +35,6 @@ namespace TowerDefense
                         nodeList.Add(node);
                         continue;
                     }
-                    if (parentIndex == 3||parentIndex == 4)
-                    {
-                        node.isWalkable = false;
-                        node.cameFromNode = nodeList[parentIndex - 1];
-                        nodeList.Add(node);
-                        continue;
-                    }
                     node.cameFromNode = nodeList[parentIndex - 1];
                     nodeList.Add(node);
                 }
@@ -57,13 +50,6 @@ namespace TowerDefense
             {
                 Testing(nodeList[0], nodeList[nodeList.Count - 1]);
             }
-        }
-        int CalculateHeuristicCost(PathNode start, PathNode target)
-        {
-            int x = Mathf.Abs(start.xPos - target.xPos);
-            int y = Mathf.Abs(start.yPos - target.yPos);
-
-            return x + y;
         }
         void Testing(PathNode start, PathNode end)
         {
