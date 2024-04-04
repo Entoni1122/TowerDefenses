@@ -63,18 +63,17 @@ namespace TowerDefense
                 {
                     return;
                 }
-                for (int i = 0; i < find.Count - 1; i++)
+                for (int i = 0; i < find.Count; i++)
                 {
                     //Adding the path to the enemy pathing
                     EnemyHexagon.Add(transform.GetChild(find[i].yPos * Row + find[i].xPos));
-                    WorldHexagon[find[i].yPos * Row + find[i].xPos].gameObject.SetActive(false);
+                    //WorldHexagon[find[i].yPos * Row + find[i].xPos].gameObject.SetActive(false);
                     GameObject NODO = Instantiate(EnemyHexagonPrefab, WorldHexagon[find[i].yPos * Row + find[i].xPos].transform.position + Vector3.up * 10, Quaternion.identity, transform);
                     PathManager.HexagonEnemyDIOPO.Add(NODO);
                 }
                 PathManager.nodes = EnemyHexagon;
                 
             }
-            print("Find Path is null");
         }
 
 
@@ -175,7 +174,6 @@ namespace TowerDefense
 
                 if (current == end)
                 {
-                    print("Find Path");
                     return GetTruePath(start, end);
                 }
 

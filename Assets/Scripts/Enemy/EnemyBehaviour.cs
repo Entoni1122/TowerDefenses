@@ -6,7 +6,7 @@ namespace TowerDefense
     {
         public float speed;
         private Transform nodeToGO;
-        private int nodeIndex = 0;
+        public int nodeIndex = 0;
 
         public float switchTargetDistance;
 
@@ -31,7 +31,7 @@ namespace TowerDefense
         {
             if (nodeIndex >= PathManager.HexagonEnemyDIOPO.Count - 1)
             {
-                Destroy(gameObject);
+                PoolingMethod.ReturnObjectToPool(gameObject);
                 return;
             }
             nodeIndex++;

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TowerDefense;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -25,7 +26,7 @@ public class PathManager : MonoBehaviour
     }
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P))
+        if (Input.GetKeyDown(KeyCode.L))
         {
             Instantiate(EnemySpawn, nodes[0].transform.position,Quaternion.identity);
             Instantiate(Nexus, nodes[nodes.Count - 1].transform.position, Quaternion.identity);
@@ -37,7 +38,7 @@ public class PathManager : MonoBehaviour
             timer -= Time.deltaTime;
             if (timer < 0)
             {
-                Instantiate(enemy, transform.position, Quaternion.identity, transform);
+                PoolingMethod.SpawnObject(enemy, HexagonEnemyDIOPO[0].transform.position, Quaternion.identity);
                 timer = timeToSpawn;
             }
         }

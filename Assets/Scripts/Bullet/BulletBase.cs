@@ -1,15 +1,17 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+
 namespace TowerDefense
 {
-    public class Bullet : MonoBehaviour
+    public class BulletBase : MonoBehaviour
     {
         public Transform target;
         public GameObject ParticleImpact;
         public float speed;
 
         public float bulletDMG;
-
-        void Update()
+        public virtual void Update()
         {
             if (target == null)
             {
@@ -19,23 +21,21 @@ namespace TowerDefense
             Vector3 directionToEnemy = target.position - transform.position;
             float distance = speed * Time.deltaTime;
 
-            if (directionToEnemy.magnitude <= distance)
+            if (directionToEnemy.magnitude <= distance )
             {
                 HitTarget();
                 return;
             }
             transform.Translate(directionToEnemy.normalized * distance, Space.World);
-
         }
-        void HitTarget()
+        public virtual void HitTarget()
         {
-            GameObject part = Instantiate(ParticleImpact, transform.position, Quaternion.identity);
+            print("Bullet Reached");
+            PoolingMethod.SpawnObject(ParticleImpact, transform.position, Quaternion.identity, PoolingMethod.PoolType.ParticleSystem);
             EnemyStats enmey = target.transform.gameObject.GetComponent<EnemyStats>();
             enmey.OnTakeDMG(bulletDMG);
 
-            Destroy(part, 2f);
-
-            Destroy(gameObject);
+            PoolingMethod.ReturnObjectToPool(gameObject);
         }
         public void ReachTarget(Transform _target)
         {

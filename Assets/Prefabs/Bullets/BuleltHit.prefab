@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 301648956812315992}
   - component: {fileID: 4037506323342437719}
   - component: {fileID: 4618458716244748632}
+  - component: {fileID: -2101973590321014647}
   m_Layer: 0
   m_Name: BuleltHit
   m_TagString: Untagged
@@ -43,7 +44,7 @@ ParticleSystem:
   serializedVersion: 8
   lengthInSec: 1
   simulationSpeed: 1
-  stopAction: 0
+  stopAction: 3
   cullingMode: 0
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
@@ -4886,3 +4887,15 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &-2101973590321014647
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2497087569954725214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7a80ea7fda6e1e4ca48f48cec25c185, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

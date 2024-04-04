@@ -109,13 +109,20 @@ namespace TowerDefense
         }
         void Shoot()
         {
-            GameObject bulletSpawned = Instantiate(Bullet, Muzzle.position, Quaternion.identity);
-            Bullet bullet = bulletSpawned.GetComponent<Bullet>();
-            if (bullet != null)
-            {
-                bullet.ReachTarget(Target);
-                bullet.bulletDMG = DMG;
-            }
+            GameObject bulletSpawned = PoolingMethod.SpawnObject(Bullet, Muzzle.position, Quaternion.identity, PoolingMethod.PoolType.Bullets);
+            bulletSpawned.GetComponent<BulletBase>().ReachTarget(Target);
+            bulletSpawned.GetComponent<BulletBase>().bulletDMG = DMG;
+            //if (bulletSpawned.TryGetComponent<BulletBase>(out BulletBase sos))
+            //{
+            //    sos.ReachTarget(Target);
+            //    sos.bulletDMG = DMG;
+            //}
+            //else
+            //{
+            //    BulletMortaio sus = bulletSpawned.GetComponent<BulletMortaio>();
+            //    sus.ReachTarget(Target);
+            //    sus.bulletDMG = DMG;
+            //}
         }
 
         public void UpgradeTurret()
