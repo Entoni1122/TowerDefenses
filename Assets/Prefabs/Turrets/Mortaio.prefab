@@ -187,7 +187,7 @@ MonoBehaviour:
   RotatingBase: {fileID: 8329146215610048982}
   Target: {fileID: 0}
   CheckForEnemiesRadius: 20
-  TurnSpeed: 2
+  TurnSpeed: 8
   Enemy:
     serializedVersion: 2
     m_Bits: 64
