@@ -6,39 +6,30 @@ using UnityEngine.UI;
 
 public class PathManager : MonoBehaviour
 {
-    public static List<Transform> nodes;
-    public static List<GameObject> HexagonEnemyDIOPO;
-    bool startSpawning;
+    [SerializeField] GameObject enemy;
 
+    public bool startSpawning;
     float timer;
     public float timeToSpawn;
 
-    [SerializeField] GameObject enemy;
-    [SerializeField] GameObject EnemySpawn;
-    [SerializeField] GameObject Nexus;
-    [SerializeField] GameObject EnemyHexagon;
-
-
-    private void Start()
+    public static Transform enemyTarget;
+    private void Awake()
     {
-        nodes = new List<Transform>();
-        HexagonEnemyDIOPO = new List<GameObject>();
+        enemy.transform.position = transform.position;
     }
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.L))
         {
-            Instantiate(EnemySpawn, nodes[0].transform.position,Quaternion.identity);
-            Instantiate(Nexus, nodes[nodes.Count - 1].transform.position, Quaternion.identity);
             startSpawning = true;
         }
-
         if (startSpawning)
         {
             timer -= Time.deltaTime;
             if (timer < 0)
             {
-                PoolingMethod.SpawnObject(enemy, HexagonEnemyDIOPO[0].transform.position, Quaternion.identity);
+                Vector3 spawnEnemy = Random.insideUnitCircle * 20;
+                PoolingMethod.SpawnObject(enemy, spawnEnemy, Quaternion.identity);
                 timer = timeToSpawn;
             }
         }

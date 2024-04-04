@@ -5,37 +5,29 @@ namespace TowerDefense
     public class EnemyBehaviour : MonoBehaviour
     {
         public float speed;
-        private Transform nodeToGO;
+        public Vector3 nodeToGO;
         public int nodeIndex = 0;
 
         public float switchTargetDistance;
-
         private void Start()
         {
-            nodeToGO = PathManager.HexagonEnemyDIOPO[nodeIndex].transform;
+            nodeToGO = PathManager.enemyTarget.position;
         }
-
         private void Update()
         {
-            Vector3 direction = ((nodeToGO.transform.position + Vector3.up * 5f) - transform.position).normalized * speed * Time.deltaTime;
+            print(nodeToGO);
+            Vector3 direction = ((nodeToGO + Vector3.up * 6f) - transform.position).normalized * speed * Time.deltaTime;
 
             transform.Translate(direction, Space.World);
 
-            if (Vector3.Distance(transform.position, nodeToGO.position + Vector3.up * 5f) < switchTargetDistance)
+            if (Vector3.Distance(transform.position, nodeToGO + Vector3.up * 6f) < switchTargetDistance)
             {
                 Reachedtarget();
             }
         }
-
         void Reachedtarget()
         {
-            if (nodeIndex >= PathManager.HexagonEnemyDIOPO.Count - 1)
-            {
-                PoolingMethod.ReturnObjectToPool(gameObject);
-                return;
-            }
-            nodeIndex++;
-            nodeToGO = PathManager.HexagonEnemyDIOPO[nodeIndex].transform;
+            PoolingMethod.ReturnObjectToPool(gameObject);
         }
     }
 }

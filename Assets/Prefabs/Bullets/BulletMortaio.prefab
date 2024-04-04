@@ -149,7 +149,7 @@ MonoBehaviour:
   target: {fileID: 0}
   ParticleImpact: {fileID: 2497087569954725214, guid: 79d1a8757d6929e4094e05d1f02bb479,
     type: 3}
-  speed: 5
+  speed: 10
   bulletDMG: 0
   CheckEnemy: 10
   enmeyMask:

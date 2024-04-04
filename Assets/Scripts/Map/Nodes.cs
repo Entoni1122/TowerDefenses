@@ -25,7 +25,6 @@ namespace TowerDefense
         private void Awake()
         {
             pathNode = new PathNode();
-            
         }
         private void Start()
         {
@@ -36,11 +35,10 @@ namespace TowerDefense
             GetComponent<MeshRenderer>().sharedMaterial.color = colors;
         }
 
-        public void Init(Vector3 pos, float yScale, Color color,bool walkable)
+        public void Init(Vector3 pos, float yScale, Color color)
         {
             PosToGo = pos;
             colors = color;
-            pathNode.isWalkable = walkable;
             transform.localScale = new Vector3(transform.localScale.x, yScale, transform.localScale.z);
         }
         private void Update()
