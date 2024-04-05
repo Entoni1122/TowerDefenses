@@ -18,7 +18,8 @@ namespace TowerDefense
 
         [Header("FireGunVariable")]
         [SerializeField] Transform Muzzle;
-        [SerializeField] GameObject Bullet;
+        [SerializeField] Transform SecondMuzzle;
+        [SerializeField]  GameObject Bullet;
         public float FireRate;
         private float FireTimer = 0;
         public float costToBuild;
@@ -85,7 +86,7 @@ namespace TowerDefense
                 Quaternion lookRtation = Quaternion.LookRotation(Dire);
                 Vector3 rotation = Quaternion.Lerp(RotatingBase.transform.rotation, lookRtation, Time.deltaTime * TurnSpeed).eulerAngles;
 
-                RotatingBase.transform.rotation = Quaternion.Euler(0, rotation.y, 0);
+                RotatingBase.transform.rotation = Quaternion.Euler(rotation.x, rotation.y, 0);
             }
         }
         void CheckToShoot()
@@ -107,22 +108,19 @@ namespace TowerDefense
                 }
             }
         }
+
+        bool bShouldSwitchMuzzle;
         void Shoot()
         {
-            GameObject bulletSpawned = PoolingMethod.SpawnObject(Bullet, Muzzle.position, Quaternion.identity, PoolingMethod.PoolType.Bullets);
+            Vector3 position = Muzzle.position;
+            if (bShouldSwitchMuzzle)
+            {
+                position = SecondMuzzle.position;
+            }
+            GameObject bulletSpawned = PoolingMethod.SpawnObject(Bullet, position, Quaternion.identity, PoolingMethod.PoolType.Bullets);
             bulletSpawned.GetComponent<BulletBase>().ReachTarget(Target);
             bulletSpawned.GetComponent<BulletBase>().bulletDMG = DMG;
-            //if (bulletSpawned.TryGetComponent<BulletBase>(out BulletBase sos))
-            //{
-            //    sos.ReachTarget(Target);
-            //    sos.bulletDMG = DMG;
-            //}
-            //else
-            //{
-            //    BulletMortaio sus = bulletSpawned.GetComponent<BulletMortaio>();
-            //    sus.ReachTarget(Target);
-            //    sus.bulletDMG = DMG;
-            //}
+            bShouldSwitchMuzzle = !bShouldSwitchMuzzle;
         }
 
         public void UpgradeTurret()

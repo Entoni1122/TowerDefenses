@@ -11,7 +11,7 @@ namespace TowerDefense
         [SerializeField] float cameraSpeedRotation;
         [SerializeField] float cameraZoomSpeed;
         [SerializeField] float borderTreshold;
-        float targetFOV = 60;
+        float targetFOV = 80;
         bool bShouldCameraMove;
 
         [Space]

@@ -186,12 +186,13 @@ MonoBehaviour:
   Enemies: []
   RotatingBase: {fileID: 8329146215610048982}
   Target: {fileID: 0}
-  CheckForEnemiesRadius: 20
+  CheckForEnemiesRadius: 40
   TurnSpeed: 8
   Enemy:
     serializedVersion: 2
     m_Bits: 64
   Muzzle: {fileID: 6568175772439231562}
+  SecondMuzzle: {fileID: 0}
   Bullet: {fileID: 8135180516128837055, guid: a84407a4be82e6040b04b8cb7e5d539f, type: 3}
   FireRate: 3
   costToBuild: 100

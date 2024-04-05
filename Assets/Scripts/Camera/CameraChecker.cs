@@ -1,4 +1,5 @@
 using TMPro;
+using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -10,9 +11,13 @@ namespace TowerDefense
         [SerializeField] GameObject upgradeMenu;
         [SerializeField] TextMeshProUGUI upgradeButton;
         [SerializeField] TextMeshProUGUI sellButton;
-
+        [SerializeField] GameObject CheckRadiusPrefab;
         GameObject Target;
-
+        private void Start()
+        {
+            CheckRadiusPrefab = Instantiate(CheckRadiusPrefab);
+            CheckRadiusPrefab.SetActive(false);
+        }
         void Update()
         {
             CheckForInteractable();
@@ -40,7 +45,6 @@ namespace TowerDefense
                         }
                     }
 
-
                     if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Turret"))
                     {
                         if (Input.GetKeyDown(KeyCode.Mouse1))
@@ -59,6 +63,7 @@ namespace TowerDefense
             if (!show)
             {
                 upgradeMenu.SetActive(false);
+                CheckRadiusPrefab.SetActive(false);
                 return;
             }
             upgradeMenu.SetActive(true);
@@ -67,6 +72,9 @@ namespace TowerDefense
         void UpdateTurretData(GameObject hit)
         {
             Turretbehaviour turretData = hit.transform.GetComponent<Turretbehaviour>();
+            CheckRadiusPrefab.SetActive(true);
+            CheckRadiusPrefab.transform.position = hit.transform.position;
+            CheckRadiusPrefab.transform.localScale = new Vector3(turretData.CheckForEnemiesRadius, turretData.CheckForEnemiesRadius, turretData.CheckForEnemiesRadius) * 2;
             upgradeButton.text = "Upgrade: " + turretData.UpgradeCost.ToString();
             sellButton.text = "Sell: " + turretData.SellCost.ToString();
         }
@@ -97,7 +105,7 @@ namespace TowerDefense
         }
         public void ExitMenuButton()
         {
-            upgradeMenu.SetActive(true);
+            ActivateUpgradeMenu(false);
         }
         #endregion
 

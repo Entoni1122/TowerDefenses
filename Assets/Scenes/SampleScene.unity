@@ -14,7 +14,7 @@ OcclusionCullingSettings:
 RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 9
-  m_Fog: 1
+  m_Fog: 0
   m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   m_FogMode: 3
   m_FogDensity: 0.01
@@ -662,6 +662,8 @@ MonoBehaviour:
   upgradeMenu: {fileID: 1616340260}
   upgradeButton: {fileID: 1470655842}
   sellButton: {fileID: 386833007}
+  CheckRadiusPrefab: {fileID: 8803747958928971931, guid: 7fec9be6f99b09e43a68abd2176da42f,
+    type: 3}
 --- !u!1 &386833005
 GameObject:
   m_ObjectHideFlags: 0
@@ -1667,10 +1669,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 903ba90dd18d7964e92464a9fcd62676, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stdTurretToBuild: {fileID: 5240912997551957016, guid: 9c46965a45be33c438c569a1ea92e73d,
+  stdTurretToBuild: {fileID: 8746502869119627926, guid: 86d31a6223f9f704fbf294927c105dd1,
     type: 3}
   turrets:
-  - {fileID: 5240912997551957016, guid: 9c46965a45be33c438c569a1ea92e73d, type: 3}
+  - {fileID: 8746502869119627926, guid: 86d31a6223f9f704fbf294927c105dd1, type: 3}
   - {fileID: 5240912997551957016, guid: 7b3cd4e1ff345bd418ce078a30a030a2, type: 3}
   - {fileID: 5240912997551957016, guid: 17d3db396788c694abbe92d8ce2aeb40, type: 3}
 --- !u!4 &1016580211
@@ -2403,7 +2405,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1486685909}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 14.38, y: 22.85, z: 2.35}
+  m_LocalPosition: {x: 14.38, y: 48.87, z: -30.84}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
