@@ -20,8 +20,9 @@ namespace TowerDefense
         [SerializeField] Transform Muzzle;
         [SerializeField] Transform SecondMuzzle;
         [SerializeField]  GameObject Bullet;
-        public float FireRate;
         private float FireTimer = 0;
+        public int turretLevel = 1;
+        public float FireRate;
         public float costToBuild;
         public int DMG;
 
@@ -127,12 +128,15 @@ namespace TowerDefense
         {
             if (PlayerStats.Instance.Coin >= UpgradeCost)
             {
-                transform.localScale += new Vector3(1,1,1);
+                transform.localScale += new Vector3(0.1f,0.1f,0.1f);
                 PlayerStats.Instance.Coin -= UpgradeCost;
-                PlayerStats.Instance.UdpateStats();
+                turretLevel += 1;
+                DMG += 1;
+                CheckForEnemiesRadius += 1;
+                FireRate -= 0.1f;
                 UpgradeCost += 50;
                 SellCost += UpgradeCost * 0.5f;
-                DMG += 1;
+                PlayerStats.Instance.UdpateStats();
             }
         }
         private void OnDrawGizmos()

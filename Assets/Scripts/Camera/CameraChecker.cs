@@ -8,9 +8,16 @@ namespace TowerDefense
 {
     public class CameraChecker : MonoBehaviour
     {
-        [SerializeField] GameObject upgradeMenu;
+        [Header("UI REF")]
         [SerializeField] TextMeshProUGUI upgradeButton;
         [SerializeField] TextMeshProUGUI sellButton;
+        [SerializeField] TextMeshProUGUI turretLevelTXT;
+        [SerializeField] TextMeshProUGUI turretDmgTXT;
+        [SerializeField] TextMeshProUGUI turretRangeTXT;
+        [SerializeField] TextMeshProUGUI turretFireRateTXT;
+
+
+        [SerializeField] GameObject upgradeMenu;
         [SerializeField] GameObject CheckRadiusPrefab;
         GameObject Target;
         private void Start()
@@ -75,8 +82,12 @@ namespace TowerDefense
             CheckRadiusPrefab.SetActive(true);
             CheckRadiusPrefab.transform.position = hit.transform.position;
             CheckRadiusPrefab.transform.localScale = new Vector3(turretData.CheckForEnemiesRadius, turretData.CheckForEnemiesRadius, turretData.CheckForEnemiesRadius) * 2;
-            upgradeButton.text = "Upgrade: " + turretData.UpgradeCost.ToString();
-            sellButton.text = "Sell: " + turretData.SellCost.ToString();
+            upgradeButton.text =  "Upgrade:\n" + turretData.UpgradeCost.ToString();
+            sellButton.text = "Sell:\n" + turretData.SellCost.ToString();
+            turretDmgTXT.text = "Damage: " + turretData.DMG.ToString();
+            turretRangeTXT.text = "Range: " + turretData.CheckForEnemiesRadius.ToString("00");
+            turretFireRateTXT.text = "PawRate: " + turretData.FireRate.ToString("00");
+            turretLevelTXT.text = "Level " + turretData.turretLevel.ToString();
         }
 
         #region ButtonFunctionality
