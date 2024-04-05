@@ -39,19 +39,19 @@ namespace TowerDefense
             if (bShouldCameraMove)
             {
                 Direction = Vector3.zero;
-                if (Input.GetKey(KeyCode.W) || Input.mousePosition.y >= Screen.height - borderTreshold)
+                if (Input.GetKey(KeyCode.W))
                 {
                     Direction.z = +1;
                 }
-                if (Input.GetKey(KeyCode.S) || Input.mousePosition.y <= borderTreshold)
+                if (Input.GetKey(KeyCode.S))
                 {
                     Direction.z = -1;
                 }
-                if (Input.GetKey(KeyCode.D) || Input.mousePosition.x >= Screen.width - borderTreshold)
+                if (Input.GetKey(KeyCode.D))
                 {
                     Direction.x = +1;
                 }
-                if (Input.GetKey(KeyCode.A) || Input.mousePosition.x <= borderTreshold)
+                if (Input.GetKey(KeyCode.A))
                 {
                     Direction.x = -1;
                 }

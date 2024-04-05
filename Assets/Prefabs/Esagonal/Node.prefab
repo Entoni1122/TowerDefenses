@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 1446122073190096872}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 9.11, y: 0, z: 0}
-  m_LocalScale: {x: 1.5, y: 1, z: 1.5}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -118,7 +118,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b8361e6b9c591644bd766f0f9beaf45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HoverColor: {r: 1, g: 0.91008675, b: 0, a: 0.2784314}
+  HoverColor: {r: 0, g: 0.9637089, b: 1, a: 0.16862746}
   TurretBuildOn: {fileID: 0}
   costToBuild: 100
   PosToGo: {x: 0, y: 0, z: 0}
