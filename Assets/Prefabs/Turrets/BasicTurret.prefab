@@ -436,6 +436,7 @@ MonoBehaviour:
   Muzzle: {fileID: 5541056081358580975}
   SecondMuzzle: {fileID: 680957621522999453}
   Bullet: {fileID: 8135180516128837055, guid: a6236f4f325aa9d4bbf49284a5b9141b, type: 3}
+  turretLevel: 1
   FireRate: 1
   costToBuild: 100
   DMG: 1

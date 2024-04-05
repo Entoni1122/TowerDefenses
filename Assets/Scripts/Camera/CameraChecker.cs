@@ -74,7 +74,6 @@ namespace TowerDefense
                 return;
             }
             upgradeMenu.SetActive(true);
-            upgradeMenu.transform.position = Input.mousePosition;
         }
         void UpdateTurretData(GameObject hit)
         {
@@ -108,6 +107,7 @@ namespace TowerDefense
             {
                 Turretbehaviour turet = Target.GetComponent<Turretbehaviour>();
                 upgradeMenu.SetActive(false);
+                CheckRadiusPrefab.SetActive(false);
                 PlayerStats.Instance.AddMoney(turet.SellCost);
                 Destroy(turet.gameObject);
                 return;
