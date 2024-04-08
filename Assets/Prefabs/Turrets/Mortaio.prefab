@@ -183,6 +183,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38d1160cef6b6d642a54b783a0a5d7bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isTurret: 1
+  UpgradeCost: 80
+  SellCost: 20
   Enemies: []
   RotatingBase: {fileID: 8329146215610048982}
   Target: {fileID: 0}
@@ -194,11 +197,10 @@ MonoBehaviour:
   Muzzle: {fileID: 6568175772439231562}
   SecondMuzzle: {fileID: 0}
   Bullet: {fileID: 8135180516128837055, guid: a84407a4be82e6040b04b8cb7e5d539f, type: 3}
+  turretLevel: 1
   FireRate: 3
   costToBuild: 100
   DMG: 4
-  UpgradeCost: 80
-  SellCost: 20
 --- !u!65 &5390684351809025547
 BoxCollider:
   m_ObjectHideFlags: 0

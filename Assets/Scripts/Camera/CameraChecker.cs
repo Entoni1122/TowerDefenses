@@ -21,9 +21,9 @@ namespace TowerDefense
 
         [Header("Single Turrets PowerUp")]
         [SerializeField] TextMeshProUGUI turretLevelTXT;
-        [SerializeField] TextMeshProUGUI turretDmgTXT;
-        [SerializeField] TextMeshProUGUI turretRangeTXT;
-        [SerializeField] TextMeshProUGUI turretFireRateTXT;
+        [SerializeField] TextMeshProUGUI buildingFirstRowTXT;
+        [SerializeField] TextMeshProUGUI buildingFirstSecondTXT;
+        [SerializeField] TextMeshProUGUI buildingFirstThirdTXT;
 
 
         GameObject CameraTargetFound;
@@ -52,7 +52,6 @@ namespace TowerDefense
                     {
                         if (hit.transform.gameObject != null)
                         {
-                            hit.transform.GetComponent<Nodes>().OnMouseHover();
                             if (Input.GetKeyDown(KeyCode.Mouse0))
                             {
                                 hit.transform.GetComponent<Nodes>().OnMouseLeftClick();
@@ -71,6 +70,17 @@ namespace TowerDefense
                             return;
                         }
                     }
+
+                    if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Building"))
+                    {
+                        if (Input.GetKeyDown(KeyCode.Mouse1))
+                        {
+                            CameraTargetFound = hit.transform.gameObject;
+                            ActivateUpgradeMenu(true);
+                            UpdateStructure(hit.transform.gameObject);
+                            return;
+                        }
+                    }
                 }
             }
         }
@@ -79,7 +89,6 @@ namespace TowerDefense
             if (!show)
             {
                 upgradeMenu.SetActive(false);
-                CheckRadiusPrefab.SetActive(false);
                 return;
             }
             upgradeMenu.SetActive(true);
@@ -90,12 +99,22 @@ namespace TowerDefense
             CheckRadiusPrefab.SetActive(true);
             CheckRadiusPrefab.transform.position = hit.transform.position;
             CheckRadiusPrefab.transform.localScale = new Vector3(turretData.CheckForEnemiesRadius, turretData.CheckForEnemiesRadius, turretData.CheckForEnemiesRadius) * 2;
+            turretLevelTXT.text = "Level " + turretData.Level.ToString();
             upgradeButton.text = "Upgrade:\n" + turretData.UpgradeCost.ToString();
             sellButton.text = "Sell:\n" + turretData.SellCost.ToString();
-            turretDmgTXT.text = "Damage: " + turretData.DMG.ToString();
-            turretRangeTXT.text = "Range: " + turretData.CheckForEnemiesRadius.ToString("00");
-            turretFireRateTXT.text = "PawRate: " + turretData.FireRate.ToString("00");
-            turretLevelTXT.text = "Level " + turretData.turretLevel.ToString();
+            buildingFirstRowTXT.text = "Damage: " + turretData.DMG.ToString();
+            buildingFirstSecondTXT.text = "Range: " + turretData.CheckForEnemiesRadius.ToString("00");
+            buildingFirstThirdTXT.text = "PawRate: " + turretData.FireRate.ToString("00");
+        }
+        void UpdateStructure(GameObject hit)
+        {
+            Structure turretData = hit.transform.GetComponent<Structure>();
+            turretLevelTXT.text = "Level " + turretData.Level.ToString();
+            upgradeButton.text = "Upgrade:\n" + turretData.UpgradeCost.ToString();
+            sellButton.text = "Sell:\n" + turretData.SellCost.ToString();
+            buildingFirstRowTXT.text = "GoldRate: " + turretData.CoinGainRate.ToString();
+            buildingFirstSecondTXT.text = "GoldGain: " + turretData.CoinGainded.ToString();
+            buildingFirstThirdTXT.text = " ";
         }
 
         #region ButtonFunctionality
@@ -103,25 +122,28 @@ namespace TowerDefense
         {
             if (CameraTargetFound != null)
             {
-                Turretbehaviour turet = CameraTargetFound.GetComponent<Turretbehaviour>();
-                turet.UpgradeTurret();
-                UpdateTurretData(turet.gameObject);
-                return;
+                Buildable turet = CameraTargetFound.GetComponent<Buildable>();
+                if (turet.isTurret)
+                {
+                    turet.UpgradeBuilding();
+                    UpdateTurretData(turet.gameObject);
+                    return;
+                }
+                turet.UpgradeBuilding();
+                UpdateStructure(turet.gameObject);
             }
-
         }
         public void ButtonSell()
         {
             if (CameraTargetFound != null)
             {
-                Turretbehaviour turet = CameraTargetFound.GetComponent<Turretbehaviour>();
+                Buildable turet = CameraTargetFound.GetComponent<Buildable>();
                 upgradeMenu.SetActive(false);
                 CheckRadiusPrefab.SetActive(false);
                 PlayerStats.Instance.AddMoney(turet.SellCost);
                 Destroy(turet.gameObject);
                 return;
             }
-
         }
         public void ExitMenuButton()
         {

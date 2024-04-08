@@ -72,7 +72,7 @@ namespace TowerDefense
             {
                 GameObject turret = BuildingManager.Instance.GetTurretToBuild();
                 TurretBuildOn = Instantiate(turret, transform.position + new Vector3(0, 40f, 0), transform.rotation);
-                float cost = turret.GetComponent<Turretbehaviour>().costToBuild;
+                float cost = turret.GetComponent<Buildable>().costToBuild;
                 PlayerStats.Instance.RemoveMoney(cost);
                 return;
             }

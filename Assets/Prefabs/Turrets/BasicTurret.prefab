@@ -425,6 +425,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38d1160cef6b6d642a54b783a0a5d7bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isTurret: 1
+  UpgradeCost: 150
+  SellCost: 75
   Enemies: []
   RotatingBase: {fileID: 2593518392446082826}
   Target: {fileID: 0}
@@ -440,8 +443,6 @@ MonoBehaviour:
   FireRate: 1
   costToBuild: 100
   DMG: 1
-  UpgradeCost: 150
-  SellCost: 75
 --- !u!65 &628056141933502989
 BoxCollider:
   m_ObjectHideFlags: 0

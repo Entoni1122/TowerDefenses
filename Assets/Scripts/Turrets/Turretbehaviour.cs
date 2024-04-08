@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace TowerDefense
 {
-    public class Turretbehaviour : MonoBehaviour
+    public class Turretbehaviour : Buildable
     {
         [SerializeField] List<GameObject> Enemies;
         [SerializeField] GameObject RotatingBase;
@@ -14,42 +14,29 @@ namespace TowerDefense
         public float CheckForEnemiesRadius;
         public float TurnSpeed;
         public LayerMask Enemy;
-        Vector3 PositionToLand;
 
         [Header("FireGunVariable")]
         [SerializeField] Transform Muzzle;
         [SerializeField] Transform SecondMuzzle;
         [SerializeField]  GameObject Bullet;
         private float FireTimer = 0;
-        public int turretLevel = 1;
         public float FireRate;
-        public float costToBuild;
         public int DMG;
 
-        [Header("UI Stuff")]
-        public float UpgradeCost;
-        public float SellCost;
 
-        private void Start()
+        public override void Start()
         {
-            AnimationOnSpawn();
+            base.Start();
+            isTurret = true;
         }
-        void Update()
+        public override void Update()
         {
-            transform.position = Vector3.Lerp(transform.position,PositionToLand,10f * Time.deltaTime);
+            base.Update();
             CheckForNearestEnemy();
             RotateTowardsNearestEnemy();
             CheckToShoot();
         }
 
-        void AnimationOnSpawn()
-        {
-            RaycastHit hit;
-            if (Physics.Raycast(transform.position,Vector3.down * 200f,out hit))
-            {
-                PositionToLand = hit.point;
-            }
-        }
         void CheckForNearestEnemy()
         {
             Collider[] enemies = Physics.OverlapSphere(transform.position, CheckForEnemiesRadius, Enemy);
@@ -123,14 +110,12 @@ namespace TowerDefense
             bulletSpawned.GetComponent<BulletBase>().bulletDMG = DMG;
             bShouldSwitchMuzzle = !bShouldSwitchMuzzle;
         }
-
-        public void UpgradeTurret()
+        public override void UpgradeBuilding()
         {
+            base.UpgradeBuilding();
             if (PlayerStats.Instance.Coin >= UpgradeCost)
             {
-                transform.localScale += new Vector3(0.1f,0.1f,0.1f);
                 PlayerStats.Instance.Coin -= UpgradeCost;
-                turretLevel += 1;
                 DMG += 1;
                 CheckForEnemiesRadius += 1;
                 FireRate -= 0.1f;
