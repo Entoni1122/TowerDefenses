@@ -20,7 +20,6 @@ namespace TowerDefense
         }
         void Dead()
         {
-            GetComponent<EnemyBehaviour>().nodeIndex = 0;
             HP = MaxHP;
             PlayerStats.Instance.AddMoney(CoinOnDead);
             PoolingMethod.ReturnObjectToPool(gameObject);

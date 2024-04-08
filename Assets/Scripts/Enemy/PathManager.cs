@@ -12,11 +12,6 @@ public class PathManager : MonoBehaviour
     float timer;
     public float timeToSpawn;
 
-    public static Transform enemyTarget;
-    private void Awake()
-    {
-        enemyTarget = transform;
-    }
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.L))
@@ -28,10 +23,10 @@ public class PathManager : MonoBehaviour
             timer -= Time.deltaTime;
             if (timer < 0)
             {
-                Vector3 spawnEnemy = Random.onUnitSphere * 20;
+                Vector3 spawnEnemy = Random.onUnitSphere * 0.3f;
                 spawnEnemy.y = 0;
                 Vector3 enem  = transform.position + spawnEnemy;
-                PoolingMethod.SpawnObject(enemy, enem + Vector3.up * 10, Quaternion.identity);
+                PoolingMethod.SpawnObject(enemy, enem, Quaternion.identity);
                 timer = timeToSpawn;
             }
         }

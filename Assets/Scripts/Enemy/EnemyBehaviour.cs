@@ -6,21 +6,18 @@ namespace TowerDefense
     {
         public float speed;
         public Vector3 nodeToGO;
-        public int nodeIndex = 0;
-
-        public float switchTargetDistance;
+        public float disappearDistance;
         private void Start()
         {
-            nodeToGO = PathManager.enemyTarget.position;
+            nodeToGO = transform.position + Vector3.down * 4;
         }
         private void Update()
         {
-            print(nodeToGO);
-            Vector3 direction = ((nodeToGO + Vector3.up * 6f) - transform.position).normalized * speed * Time.deltaTime;
+            Vector3 direction = (nodeToGO - transform.position).normalized * speed * Time.deltaTime;
 
             transform.Translate(direction, Space.World);
 
-            if (Vector3.Distance(transform.position, nodeToGO + Vector3.up * 6f) < switchTargetDistance)
+            if (Vector3.Distance(transform.position, nodeToGO) < disappearDistance)
             {
                 Reachedtarget();
             }

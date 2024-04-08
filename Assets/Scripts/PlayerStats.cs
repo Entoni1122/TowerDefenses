@@ -42,8 +42,8 @@ namespace TowerDefense
 
         public void UdpateStats()
         {
-            CoinTXT.text = "Coin : " + Coin.ToString();
-            HpTXT.text = "Lives : " + HP.ToString();
+            CoinTXT.text = "$ " + Coin.ToString();
+            HpTXT.text = "<3 " + HP.ToString();
         }
     }
 }
