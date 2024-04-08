@@ -25,11 +25,6 @@ namespace TowerDefense
         [SerializeField] TextMeshProUGUI turretRangeTXT;
         [SerializeField] TextMeshProUGUI turretFireRateTXT;
 
-        [Header("Tendine REF")]
-        [SerializeField] Button TendinaTurretsRef;
-        [SerializeField] Button TendinaStructuresRef;
-        Animation AnimationTurretsRef;
-        Animation AnimationStructuresRef;
 
         GameObject CameraTargetFound;
 
@@ -38,11 +33,6 @@ namespace TowerDefense
             CheckRadiusPrefab = Instantiate(CheckRadiusPrefab);
             CheckRadiusPrefab.SetActive(false);
 
-            AnimationTurretsRef = TendinaTurretsRef.gameObject.GetComponent<Animation>();
-            AnimationStructuresRef = TendinaStructuresRef.gameObject.GetComponent<Animation>();
-
-            TendinaTurretsRef.onClick.AddListener(delegate { ButtonTendinaClicked(AnimationTurretsRef); });
-            TendinaStructuresRef.onClick.AddListener(delegate { ButtonTendinaClicked(AnimationStructuresRef); });
         }
         void Update()
         {
@@ -109,18 +99,6 @@ namespace TowerDefense
         }
 
         #region ButtonFunctionality
-
-        int animIndex;
-        public void ButtonTendinaClicked(Animation buttonRef)
-        {
-            if (!buttonRef.isPlaying)
-            {
-                buttonRef.Play();
-            }
-        }
-
-
-
         public void ButtonClicked()
         {
             if (CameraTargetFound != null)
