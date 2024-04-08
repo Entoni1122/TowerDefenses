@@ -18,13 +18,14 @@ namespace TowerDefense
         [SerializeField] private Button generalTendina;
 
         [SerializeField] GameObject turretsScelta;
+        [SerializeField] GameObject structureScelta;
 
         private void Start()
         {
             _animator = GetComponent<Animator>();
 
-            turrets.onClick.AddListener(ButtonTurret);
-            //structures.onClick.AddListener(delegate { OnClick("TurretsTrigger"); });
+            turrets.onClick.AddListener(delegate { ButtonTurret(turretsScelta, structureScelta); });
+            structures.onClick.AddListener(delegate { ButtonTurret(structureScelta, turretsScelta); });
             generalTendina.onClick.AddListener(delegate { OnClick("TurretsTrigger"); });
         }
         public void OnClick(string name)
@@ -33,17 +34,10 @@ namespace TowerDefense
         }
 
         bool showTurrets = true;
-        public void ButtonTurret()
+        public void ButtonTurret(GameObject toActivate,GameObject toDeactivate)
         {
-            if (showTurrets)
-            {
-                turretsScelta.SetActive(false);
-            }
-            else
-            {
-                turretsScelta.SetActive(true);
-            }
-            showTurrets = !showTurrets;
+            toActivate.SetActive(true);
+            toDeactivate.SetActive(false);
         }
     }
 }
