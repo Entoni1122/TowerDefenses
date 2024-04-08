@@ -1,29 +1,48 @@
 using TMPro;
+using Unity.VisualScripting;
+using UnityEditor.Rendering;
 using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 
 namespace TowerDefense
 {
     public class CameraChecker : MonoBehaviour
     {
-        [Header("UI REF")]
+        [Header("Turrets UI")]
         [SerializeField] TextMeshProUGUI upgradeButton;
         [SerializeField] TextMeshProUGUI sellButton;
+        [SerializeField] GameObject upgradeMenu;
+        [SerializeField] GameObject CheckRadiusPrefab;
+
+        [Space]
+
+        [Header("Single Turrets PowerUp")]
         [SerializeField] TextMeshProUGUI turretLevelTXT;
         [SerializeField] TextMeshProUGUI turretDmgTXT;
         [SerializeField] TextMeshProUGUI turretRangeTXT;
         [SerializeField] TextMeshProUGUI turretFireRateTXT;
 
+        [Header("Tendine REF")]
+        [SerializeField] Button TendinaTurretsRef;
+        [SerializeField] Button TendinaStructuresRef;
+        Animation AnimationTurretsRef;
+        Animation AnimationStructuresRef;
 
-        [SerializeField] GameObject upgradeMenu;
-        [SerializeField] GameObject CheckRadiusPrefab;
-        GameObject Target;
+        GameObject CameraTargetFound;
+
         private void Start()
         {
             CheckRadiusPrefab = Instantiate(CheckRadiusPrefab);
             CheckRadiusPrefab.SetActive(false);
+
+            AnimationTurretsRef = TendinaTurretsRef.gameObject.GetComponent<Animation>();
+            AnimationStructuresRef = TendinaStructuresRef.gameObject.GetComponent<Animation>();
+
+            TendinaTurretsRef.onClick.AddListener(delegate { ButtonTendinaClicked(AnimationTurretsRef); });
+            TendinaStructuresRef.onClick.AddListener(delegate { ButtonTendinaClicked(AnimationStructuresRef); });
         }
         void Update()
         {
@@ -56,7 +75,7 @@ namespace TowerDefense
                     {
                         if (Input.GetKeyDown(KeyCode.Mouse1))
                         {
-                            Target = hit.transform.gameObject;
+                            CameraTargetFound = hit.transform.gameObject;
                             ActivateUpgradeMenu(true);
                             UpdateTurretData(hit.transform.gameObject);
                             return;
@@ -81,7 +100,7 @@ namespace TowerDefense
             CheckRadiusPrefab.SetActive(true);
             CheckRadiusPrefab.transform.position = hit.transform.position;
             CheckRadiusPrefab.transform.localScale = new Vector3(turretData.CheckForEnemiesRadius, turretData.CheckForEnemiesRadius, turretData.CheckForEnemiesRadius) * 2;
-            upgradeButton.text =  "Upgrade:\n" + turretData.UpgradeCost.ToString();
+            upgradeButton.text = "Upgrade:\n" + turretData.UpgradeCost.ToString();
             sellButton.text = "Sell:\n" + turretData.SellCost.ToString();
             turretDmgTXT.text = "Damage: " + turretData.DMG.ToString();
             turretRangeTXT.text = "Range: " + turretData.CheckForEnemiesRadius.ToString("00");
@@ -90,11 +109,23 @@ namespace TowerDefense
         }
 
         #region ButtonFunctionality
+
+        int animIndex;
+        public void ButtonTendinaClicked(Animation buttonRef)
+        {
+            if (!buttonRef.isPlaying)
+            {
+                buttonRef.Play();
+            }
+        }
+
+
+
         public void ButtonClicked()
         {
-            if (Target != null)
+            if (CameraTargetFound != null)
             {
-                Turretbehaviour turet = Target.GetComponent<Turretbehaviour>();
+                Turretbehaviour turet = CameraTargetFound.GetComponent<Turretbehaviour>();
                 turet.UpgradeTurret();
                 UpdateTurretData(turet.gameObject);
                 return;
@@ -103,9 +134,9 @@ namespace TowerDefense
         }
         public void ButtonSell()
         {
-            if (Target != null)
+            if (CameraTargetFound != null)
             {
-                Turretbehaviour turet = Target.GetComponent<Turretbehaviour>();
+                Turretbehaviour turet = CameraTargetFound.GetComponent<Turretbehaviour>();
                 upgradeMenu.SetActive(false);
                 CheckRadiusPrefab.SetActive(false);
                 PlayerStats.Instance.AddMoney(turet.SellCost);
