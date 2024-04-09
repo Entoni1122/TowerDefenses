@@ -84,7 +84,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 123a53ab5cd9d99499a8d51dd9c049ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.4
+  speed: 2
   nodeToGO: {x: 0, y: 0, z: 0}
   disappearDistance: 0.2
 --- !u!212 &4271892385358795475

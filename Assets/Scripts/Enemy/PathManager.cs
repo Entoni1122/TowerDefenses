@@ -11,6 +11,7 @@ public class PathManager : MonoBehaviour
     public bool startSpawning;
     float timer;
     public float timeToSpawn;
+    [SerializeField] float radiusSpawner;
 
     private void Update()
     {
@@ -23,7 +24,7 @@ public class PathManager : MonoBehaviour
             timer -= Time.deltaTime;
             if (timer < 0)
             {
-                Vector3 spawnEnemy = Random.onUnitSphere * 0.3f;
+                Vector3 spawnEnemy = Random.onUnitSphere * radiusSpawner;
                 spawnEnemy.y = 0;
                 Vector3 enem  = transform.position + spawnEnemy;
                 PoolingMethod.SpawnObject(enemy, enem, Quaternion.identity);

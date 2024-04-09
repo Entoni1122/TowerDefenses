@@ -29,7 +29,7 @@ namespace TowerDefense
                 Debug.Log("Touching at: " + touch.position);
                 Ray camRay = cam.ScreenPointToRay(touch.position);
                 RaycastHit raycastHit;
-                if (Physics.Raycast(camRay, out raycastHit, 10))
+                if (Physics.Raycast(camRay, out raycastHit, 100))
                 {
                     if (touch.phase == TouchPhase.Began)
                     {

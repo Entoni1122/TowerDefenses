@@ -9,7 +9,7 @@ namespace TowerDefense
         public float disappearDistance;
         private void Start()
         {
-            nodeToGO = transform.position + Vector3.down * 4;
+            nodeToGO = transform.position + Vector3.down * 24;
         }
         private void Update()
         {
