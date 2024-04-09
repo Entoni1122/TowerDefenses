@@ -37,19 +37,19 @@ namespace TowerDefense
 
         public void Init(Vector3 pos, float yScale, Color color)
         {
-            PosToGo = pos;
-            colors = color;
-            transform.localScale = new Vector3(transform.localScale.x, yScale, transform.localScale.z);
+            //PosToGo = pos;
+            //colors = color;
+            //transform.localScale = new Vector3(transform.localScale.x, yScale, transform.localScale.z);
         }
-        private void Update()
-        {
-            transform.position = Vector3.Lerp(transform.position, PosToGo, Time.deltaTime * 5);
-            float dist = Vector3.Distance(transform.position, PosToGo);
-            if (dist <= 0.4f)
-            {
-                transform.position = PosToGo;
-            }
-        }
+        //private void Update()
+        //{
+        //    //transform.position = Vector3.Lerp(transform.position, PosToGo, Time.deltaTime * 5);
+        //    //float dist = Vector3.Distance(transform.position, PosToGo);
+        //    //if (dist <= 0.4f)
+        //    //{
+        //    //    transform.position = PosToGo;
+        //    //}
+        //}
 
         #region MouseBehaviour
         public void OnMouseHover()
@@ -71,7 +71,7 @@ namespace TowerDefense
             else if (PlayerStats.Instance.Coin >= costToBuild)
             {
                 GameObject turret = BuildingManager.Instance.GetTurretToBuild();
-                TurretBuildOn = Instantiate(turret, transform.position + new Vector3(0, 40f, 0), transform.rotation);
+                TurretBuildOn = Instantiate(turret, transform.position + new Vector3(0, 20f, 0), transform.rotation,transform);
                 float cost = turret.GetComponent<Buildable>().costToBuild;
                 PlayerStats.Instance.RemoveMoney(cost);
                 return;

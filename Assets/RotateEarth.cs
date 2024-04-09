@@ -10,26 +10,26 @@ namespace TowerDefense
         public float MobileRotationSpeed = 0.4f;
         //Drag the camera object here
         public Camera cam;
+        public Transform objToRotate;
 
         void OnMouseDrag()
         {
             float rotX = Input.GetAxis("Mouse X") * PCRotationSpeed;
             float rotY = Input.GetAxis("Mouse Y") * PCRotationSpeed;
 
-            Vector3 right = Vector3.Cross(cam.transform.up, transform.position - cam.transform.position);
-            Vector3 up = Vector3.Cross(transform.position - cam.transform.position, right);
-            transform.rotation = Quaternion.AngleAxis(-rotX, up) * transform.rotation;
-            transform.rotation = Quaternion.AngleAxis(rotY, right) * transform.rotation;
+            Vector3 right = Vector3.Cross(cam.transform.up, objToRotate.position - cam.transform.position);
+            Vector3 up = Vector3.Cross(objToRotate.position - cam.transform.position, right);
+            objToRotate.rotation = Quaternion.AngleAxis(-rotX, up) * objToRotate.rotation;
+            objToRotate.rotation = Quaternion.AngleAxis(rotY, right) * objToRotate.rotation;
         }
 
         void Update()
         {
             foreach (Touch touch in Input.touches)
             {
-                Debug.Log("Touching at: " + touch.position);
                 Ray camRay = cam.ScreenPointToRay(touch.position);
                 RaycastHit raycastHit;
-                if (Physics.Raycast(camRay, out raycastHit, 100))
+                if (Physics.Raycast(camRay, out raycastHit, 100,LayerMask.NameToLayer("Earth")))
                 {
                     if (touch.phase == TouchPhase.Began)
                     {
@@ -38,7 +38,7 @@ namespace TowerDefense
                     else if (touch.phase == TouchPhase.Moved)
                     {
                         Debug.Log("Touch phase Moved");
-                        transform.Rotate(0,-touch.deltaPosition.x * MobileRotationSpeed, 0, Space.World);
+                        objToRotate.Rotate(0,-touch.deltaPosition.x * MobileRotationSpeed, 0, Space.World);
                     }
                     else if (touch.phase == TouchPhase.Ended)
                     {

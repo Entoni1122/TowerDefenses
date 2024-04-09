@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Rendering;
 using UnityEngine;
 
 namespace TowerDefense
@@ -15,6 +16,7 @@ namespace TowerDefense
         public float costToBuild;
         public int Level;
 
+        bool isLanded;
         // Update is called once per frame
         public virtual void Start()
         {
@@ -23,7 +25,16 @@ namespace TowerDefense
 
         public virtual void Update()
         {
-            transform.position = Vector3.Lerp(transform.position,PositionToLand,10f * Time.deltaTime);
+            float dist = Vector3.Distance(transform.position,PositionToLand);
+
+            if (!isLanded && dist > 0.1f)
+            {
+                transform.position = Vector3.Lerp(transform.position, PositionToLand, 20f * Time.deltaTime);
+            }
+            else
+            {
+                isLanded = true;
+            }
         }
 
         void AnimationOnSpawn()

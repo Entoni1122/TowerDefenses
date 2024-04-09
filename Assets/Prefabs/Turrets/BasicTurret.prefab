@@ -406,8 +406,8 @@ Transform:
   m_GameObject: {fileID: 8746502869119627926}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 2089648385172751697}
   m_Father: {fileID: 0}
@@ -428,6 +428,8 @@ MonoBehaviour:
   isTurret: 1
   UpgradeCost: 150
   SellCost: 75
+  costToBuild: 100
+  Level: 0
   Enemies: []
   RotatingBase: {fileID: 2593518392446082826}
   Target: {fileID: 0}
@@ -439,9 +441,7 @@ MonoBehaviour:
   Muzzle: {fileID: 5541056081358580975}
   SecondMuzzle: {fileID: 680957621522999453}
   Bullet: {fileID: 8135180516128837055, guid: a6236f4f325aa9d4bbf49284a5b9141b, type: 3}
-  turretLevel: 1
   FireRate: 1
-  costToBuild: 100
   DMG: 1
 --- !u!65 &628056141933502989
 BoxCollider:
