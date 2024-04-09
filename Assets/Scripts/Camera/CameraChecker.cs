@@ -25,60 +25,67 @@ namespace TowerDefense
         [SerializeField] TextMeshProUGUI buildingFirstSecondTXT;
         [SerializeField] TextMeshProUGUI buildingFirstThirdTXT;
 
-
         GameObject CameraTargetFound;
 
         private void Start()
         {
             CheckRadiusPrefab = Instantiate(CheckRadiusPrefab);
             CheckRadiusPrefab.SetActive(false);
-
         }
         void Update()
         {
+            if (CameraTargetFound != null)
+            {
+                CheckRadiusPrefab.transform.position = CameraTargetFound.transform.position;
+            }
             CheckForInteractable();
         }
         void CheckForInteractable()
         {
-            RaycastHit hit;
-
-            Debug.DrawRay(Camera.main.transform.position, Camera.main.ScreenPointToRay(Input.mousePosition).direction * 200f, Color.red);
-
-            if (Physics.Raycast(transform.position, Camera.main.ScreenPointToRay(Input.mousePosition).direction, out hit, 200f))
+            if (!EventSystem.current.IsPointerOverGameObject())
             {
-                if (!EventSystem.current.IsPointerOverGameObject())
+                foreach (Touch touch in Input.touches)
                 {
-                    if (hit.transform.gameObject.layer == LayerMask.NameToLayer("HexagonNode"))
+                    Ray camRay = Camera.main.ScreenPointToRay(touch.position);
+                    RaycastHit raycastHit;
+
+                    if (Physics.Raycast(camRay, out raycastHit, 100))
                     {
-                        if (hit.transform.gameObject != null)
+                        if (touch.phase == TouchPhase.Began)
                         {
-                            if (Input.GetKeyDown(KeyCode.Mouse0))
+                            if (raycastHit.transform.gameObject.layer == LayerMask.NameToLayer("HexagonNode"))
                             {
-                                hit.transform.GetComponent<Nodes>().OnMouseLeftClick();
-                                ActivateUpgradeMenu(false);
+                                if (Input.GetKeyDown(KeyCode.Mouse0))
+                                {
+                                    raycastHit.transform.GetComponent<Nodes>().OnMouseLeftClick();
+                                    ActivateUpgradeMenu(false);
+                                }
+                            }
+                            else if (raycastHit.transform.gameObject.layer == LayerMask.NameToLayer("Turret"))
+                            {
+                                if (Input.GetKeyDown(KeyCode.Mouse0))
+                                {
+                                    CameraTargetFound = raycastHit.transform.gameObject;
+                                    ActivateUpgradeMenu(true);
+                                    UpdateTurretData(raycastHit.transform.gameObject);
+                                    return;
+                                }
+                            }
+                            else if (raycastHit.transform.gameObject.layer == LayerMask.NameToLayer("Building"))
+                            {
+                                CameraTargetFound = raycastHit.transform.gameObject;
+                                ActivateUpgradeMenu(true);
+                                UpdateStructure(raycastHit.transform.gameObject);
+                                return;
                             }
                         }
-                    }
-
-                    if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Turret"))
-                    {
-                        if (Input.GetKeyDown(KeyCode.Mouse1))
+                        else if (touch.phase == TouchPhase.Moved)
                         {
-                            CameraTargetFound = hit.transform.gameObject;
-                            ActivateUpgradeMenu(true);
-                            UpdateTurretData(hit.transform.gameObject);
-                            return;
+                            Debug.Log("Touch phase Moved");
                         }
-                    }
-
-                    if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Building"))
-                    {
-                        if (Input.GetKeyDown(KeyCode.Mouse1))
+                        else if (touch.phase == TouchPhase.Ended)
                         {
-                            CameraTargetFound = hit.transform.gameObject;
-                            ActivateUpgradeMenu(true);
-                            UpdateStructure(hit.transform.gameObject);
-                            return;
+                            Debug.Log("Touch phase Ended");
                         }
                     }
                 }
@@ -148,6 +155,7 @@ namespace TowerDefense
         public void ExitMenuButton()
         {
             ActivateUpgradeMenu(false);
+            CheckRadiusPrefab.SetActive(false);
         }
         #endregion
 

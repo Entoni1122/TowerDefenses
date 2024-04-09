@@ -433,7 +433,7 @@ MonoBehaviour:
   Enemies: []
   RotatingBase: {fileID: 2593518392446082826}
   Target: {fileID: 0}
-  CheckForEnemiesRadius: 20
+  CheckForEnemiesRadius: 3
   TurnSpeed: 5
   Enemy:
     serializedVersion: 2
@@ -462,5 +462,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.5767679, y: 1.7389408, z: 1.5687621}
-  m_Center: {x: 0.05175066, y: 0.9438073, z: 0.025007486}
+  m_Size: {x: 1.576768, y: 3.4420774, z: 1.6929045}
+  m_Center: {x: 0.05175069, y: 1.7953764, z: 0.0047352165}

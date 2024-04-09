@@ -29,7 +29,7 @@ namespace TowerDefense
             {
                 Ray camRay = cam.ScreenPointToRay(touch.position);
                 RaycastHit raycastHit;
-                if (Physics.Raycast(camRay, out raycastHit, 100,LayerMask.NameToLayer("Earth")))
+                if (Physics.Raycast(camRay, out raycastHit, 100))
                 {
                     if (touch.phase == TouchPhase.Began)
                     {
