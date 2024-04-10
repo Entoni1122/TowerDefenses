@@ -26,7 +26,7 @@ namespace TowerDefense
         [SerializeField] TextMeshProUGUI buildingFirstThirdTXT;
 
         GameObject CameraTargetFound;
-
+        [SerializeField]GameObject Particle;
         private void Start()
         {
             CheckRadiusPrefab = Instantiate(CheckRadiusPrefab);
@@ -125,11 +125,12 @@ namespace TowerDefense
         }
 
         #region ButtonFunctionality
-        public void ButtonClicked()
+        public void UpgradeButtonù()
         {
             if (CameraTargetFound != null)
             {
                 Buildable turet = CameraTargetFound.GetComponent<Buildable>();
+                PoolingMethod.SpawnObject(Particle, CameraTargetFound.transform.position, Quaternion.identity);
                 if (turet.isTurret)
                 {
                     turet.UpgradeBuilding();

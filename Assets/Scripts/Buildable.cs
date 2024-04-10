@@ -49,6 +49,7 @@ namespace TowerDefense
         public virtual void UpgradeBuilding()
         {
             Level += 1;
+
             print("Called Upgrade Building");
         }
     }
