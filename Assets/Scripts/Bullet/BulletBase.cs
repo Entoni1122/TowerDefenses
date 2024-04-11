@@ -7,7 +7,6 @@ namespace TowerDefense
     public class BulletBase : MonoBehaviour
     {
         public Transform target;
-        public GameObject ParticleImpact;
         public float speed;
 
         public float bulletDMG;
@@ -30,8 +29,6 @@ namespace TowerDefense
         }
         public virtual void HitTarget()
         {
-            print("Bullet Reached");
-            PoolingMethod.SpawnObject(ParticleImpact, transform.position, Quaternion.identity, PoolingMethod.PoolType.ParticleSystem);
             EnemyStats enmey = target.transform.gameObject.GetComponent<EnemyStats>();
             enmey.OnTakeDMG(bulletDMG);
 

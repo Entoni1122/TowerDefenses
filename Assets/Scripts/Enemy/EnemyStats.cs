@@ -10,6 +10,8 @@ namespace TowerDefense
         public int DMG;
         public float CoinOnDead;
 
+        public GameObject ParticleImpact;
+
         public void OnTakeDMG(float b)
         {
             HP -= b;
@@ -20,6 +22,7 @@ namespace TowerDefense
         }
         void Dead()
         {
+            PoolingMethod.SpawnObject(ParticleImpact, transform.position, Quaternion.identity, PoolingMethod.PoolType.ParticleSystem);
             HP = MaxHP;
             PlayerStats.Instance.AddMoney(CoinOnDead);
             PoolingMethod.ReturnObjectToPool(gameObject);

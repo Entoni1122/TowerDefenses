@@ -17,7 +17,6 @@ namespace TowerDefense
                 EnemyStats enemyStatsRef = enemy.transform.gameObject.GetComponent<EnemyStats>();
                 enemyStatsRef.OnTakeDMG(bulletDMG);
             }
-            PoolingMethod.SpawnObject(ParticleImpact, transform.position, Quaternion.identity,PoolingMethod.PoolType.ParticleSystem);
             
             PoolingMethod.ReturnObjectToPool(gameObject);
         }

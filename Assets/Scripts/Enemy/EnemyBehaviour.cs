@@ -11,6 +11,10 @@ namespace TowerDefense
         {
             nodeToGO = transform.position + Vector3.down * 24;
         }
+        private void OnEnable()
+        {
+            nodeToGO = transform.position + Vector3.down * 24;
+        }
         private void Update()
         {
             Vector3 direction = (nodeToGO - transform.position).normalized * speed * Time.deltaTime;
