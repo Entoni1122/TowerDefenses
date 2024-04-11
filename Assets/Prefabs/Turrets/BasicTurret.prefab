@@ -429,11 +429,13 @@ MonoBehaviour:
   UpgradeCost: 150
   SellCost: 75
   costToBuild: 100
-  Level: 0
+  Level: 1
+  Particle: {fileID: 3399689567401867092, guid: 6c01e993455899d469e4dd79644e4a18,
+    type: 3}
   Enemies: []
   RotatingBase: {fileID: 2593518392446082826}
   Target: {fileID: 0}
-  CheckForEnemiesRadius: 3
+  CheckForEnemiesRadius: 6
   TurnSpeed: 5
   Enemy:
     serializedVersion: 2
@@ -443,6 +445,10 @@ MonoBehaviour:
   Bullet: {fileID: 8135180516128837055, guid: a6236f4f325aa9d4bbf49284a5b9141b, type: 3}
   FireRate: 1
   DMG: 1
+  UpgradeFireRate: 0.05
+  UpgradeDMG: 1
+  UpgradeCheckForEnemiesRadius: 2
+  MaxLevel: 5
 --- !u!65 &628056141933502989
 BoxCollider:
   m_ObjectHideFlags: 0

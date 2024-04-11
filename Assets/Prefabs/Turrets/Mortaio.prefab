@@ -186,21 +186,27 @@ MonoBehaviour:
   isTurret: 1
   UpgradeCost: 80
   SellCost: 20
+  costToBuild: 100
+  Level: 0
+  Particle: {fileID: 3399689567401867092, guid: 6c01e993455899d469e4dd79644e4a18,
+    type: 3}
   Enemies: []
   RotatingBase: {fileID: 8329146215610048982}
   Target: {fileID: 0}
-  CheckForEnemiesRadius: 40
+  CheckForEnemiesRadius: 10
   TurnSpeed: 8
   Enemy:
     serializedVersion: 2
     m_Bits: 64
   Muzzle: {fileID: 6568175772439231562}
-  SecondMuzzle: {fileID: 0}
+  SecondMuzzle: {fileID: 6568175772439231562}
   Bullet: {fileID: 8135180516128837055, guid: a84407a4be82e6040b04b8cb7e5d539f, type: 3}
-  turretLevel: 1
   FireRate: 3
-  costToBuild: 100
   DMG: 4
+  UpgradeFireRate: 0.6
+  UpgradeDMG: 3
+  UpgradeCheckForEnemiesRadius: 3
+  MaxLevel: 5
 --- !u!65 &5390684351809025547
 BoxCollider:
   m_ObjectHideFlags: 0

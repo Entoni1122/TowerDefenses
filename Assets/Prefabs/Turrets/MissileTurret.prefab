@@ -218,10 +218,12 @@ MonoBehaviour:
   SellCost: 50
   costToBuild: 300
   Level: 0
+  Particle: {fileID: 3399689567401867092, guid: 6c01e993455899d469e4dd79644e4a18,
+    type: 3}
   Enemies: []
   RotatingBase: {fileID: 3869303579395935085}
   Target: {fileID: 0}
-  CheckForEnemiesRadius: 25
+  CheckForEnemiesRadius: 8
   TurnSpeed: 8
   Enemy:
     serializedVersion: 2
@@ -231,6 +233,10 @@ MonoBehaviour:
   Bullet: {fileID: 8135180516128837055, guid: 384354d26a53c254ea5dd30b07872724, type: 3}
   FireRate: 2
   DMG: 2
+  UpgradeFireRate: 0.2
+  UpgradeDMG: 2
+  UpgradeCheckForEnemiesRadius: 2
+  MaxLevel: 5
 --- !u!65 &1567517155711193013
 BoxCollider:
   m_ObjectHideFlags: 0

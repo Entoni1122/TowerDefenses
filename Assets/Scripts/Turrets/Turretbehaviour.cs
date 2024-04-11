@@ -18,10 +18,16 @@ namespace TowerDefense
         [Header("FireGunVariable")]
         [SerializeField] Transform Muzzle;
         [SerializeField] Transform SecondMuzzle;
-        [SerializeField]  GameObject Bullet;
+        [SerializeField] GameObject Bullet;
         private float FireTimer = 0;
         public float FireRate;
         public int DMG;
+
+        [Header("Upgrade Stats")]
+        public float UpgradeFireRate;
+        public int UpgradeDMG;
+        public float UpgradeCheckForEnemiesRadius;
+        public int MaxLevel;
 
 
         public override void Start()
@@ -112,16 +118,19 @@ namespace TowerDefense
         }
         public override void UpgradeBuilding()
         {
-            base.UpgradeBuilding();
-            if (PlayerStats.Instance.Coin >= UpgradeCost)
+            if (Level < MaxLevel)
             {
-                PlayerStats.Instance.Coin -= UpgradeCost;
-                DMG += 1;
-                CheckForEnemiesRadius += 1;
-                FireRate -= 0.1f;
-                UpgradeCost += 50;
-                SellCost += UpgradeCost * 0.5f;
-                PlayerStats.Instance.UdpateStats();
+                if (PlayerStats.Instance.Coin >= UpgradeCost)
+                {
+                    base.UpgradeBuilding();
+                    PlayerStats.Instance.Coin -= UpgradeCost;
+                    DMG += UpgradeDMG;
+                    CheckForEnemiesRadius += UpgradeCheckForEnemiesRadius;
+                    FireRate -= UpgradeFireRate;
+                    UpgradeCost += 50;
+                    SellCost += UpgradeCost * 0.5f;
+                    PlayerStats.Instance.UdpateStats();
+                }
             }
         }
         private void OnDrawGizmos()

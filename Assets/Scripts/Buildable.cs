@@ -45,10 +45,12 @@ namespace TowerDefense
                 PositionToLand = hit.point;
             }
         }
+            [SerializeField] GameObject Particle;
 
         public virtual void UpgradeBuilding()
         {
             Level += 1;
+            PoolingMethod.SpawnObject(Particle, transform.position, Quaternion.identity);
 
             print("Called Upgrade Building");
         }
