@@ -203,7 +203,7 @@ MonoBehaviour:
   Bullet: {fileID: 8135180516128837055, guid: a84407a4be82e6040b04b8cb7e5d539f, type: 3}
   FireRate: 3
   DMG: 4
-  UpgradeFireRate: 0.6
+  UpgradeFireRate: 0.2
   UpgradeDMG: 3
   UpgradeCheckForEnemiesRadius: 3
   MaxLevel: 5
