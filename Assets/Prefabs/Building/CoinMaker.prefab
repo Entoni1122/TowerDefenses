@@ -123,5 +123,7 @@ MonoBehaviour:
   SellCost: 50
   costToBuild: 50
   Level: 1
+  Particle: {fileID: 3399689567401867092, guid: 6c01e993455899d469e4dd79644e4a18,
+    type: 3}
   CoinGainRate: 10
   CoinGainded: 50
